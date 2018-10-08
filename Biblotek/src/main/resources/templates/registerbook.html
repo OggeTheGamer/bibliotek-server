@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Registrera bok</h1>
+    <p th:text="${message}"></p>
+    <form action="#" th:action="@{/registerbook}" th:object="${book}" method="post">
+      <p>
+        <label for="isbn">ISBN: </label>
+        <input id="isbn" type="text" name="isbn" th:field="*{isbn}" autofocus />
+      </p>
+      <p>
+        <label for="id">Bok ID: </label>
+        <input id="id" type="text" name="" value="" th:field="*{id}">
+      </p>
+      <input type="submit" value="Registrera"></input>
+    </form>
+  </body>
+</html>
