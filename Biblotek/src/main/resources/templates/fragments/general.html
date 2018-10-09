@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  <head th:fragment="head">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
   </head>
   <body>
     <header th:fragment="header">
       <h1>SSIS Bibliotek</h1>
       <nav>
         <ol>
-          <li><a href="@{/}">Hem</a></li>
+          <li><a th:href="@{/}">Hem</a></li>
           <li><a href="/oauth2/authorization/google">Logga in</a></li>
         </ol>
       </nav>

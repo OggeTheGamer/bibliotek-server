@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+  <head th:replace="fragments/general :: head">
     <meta charset="utf-8">
     <title></title>
   </head>
   <body>
-    <img th:src="${book.image}" src="" alt="Book cover">
-    <h1 th:text="${book.title}">Bok titel</h1>
-    <h2>Skriven av: <span th:text="${book.authors}">Namn Efternamn</span></h2>
-    <p>Status: <span>todo</span></p>
-    <p><h3><b>Beskrivning</b></h3>
-      <p th:text="${book.description}">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    <div th:replace="fragments/general :: header"></div>
+
+    <div class="book">
+      <img th:src="${book.image}" src="http://books.google.com/books/content?id=SJnHBAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" alt="Book cover">
+      <h1 th:text="${book.title}">Bok titel</h1>
+      <h2>Skriven av: <span th:text="${book.authors}">Namn Efternamn</span></h2>
+      <p>Status: <span>todo</span></p>
+      <p><h3><b>Beskrivning</b></h3>
+        <p th:text="${book.description}">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
       </p>
-    </p>
+    </div>
+    
   </body>
+  <div th:replace="fragments/general.html :: footer"></div>
 </html>

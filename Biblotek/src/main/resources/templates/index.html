@@ -1,26 +1,26 @@
   <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+  <head th:replace="fragments/general.html :: head">
     <meta charset="utf-8">
     <title></title>
-    <style media="screen">
-      .book {
-        width: 20%;
-        flex-shrink: 0;
-        margin-left: 20px;
-        flex-wrap: wrap;
-      }
-      .book img {
-        width: 100%;
-      }
-
-      #books {
-        display: flex;
-      }
-    </style>
   </head>
+  <style media="screen">
+    .book {
+      width: 20%;
+      flex-shrink: 0;
+      margin-left: 20px;
+      flex-wrap: wrap;
+    }
+    .book img {
+      width: 100%;
+    }
+
+    #books {
+      display: flex;
+    }
+  </style>
   <body>
-    <div th:replace="fragments/general.html :: header"></div>
+    <header th:replace="fragments/general.html :: header"></header>
     <h1>Böcker</h1>
     <div id="books">
       <div class="book" th:each="book : ${books}">
