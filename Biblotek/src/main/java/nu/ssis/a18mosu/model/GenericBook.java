@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
 
-@Data @Document 
+@Data @Document(collection="generic_books")
 public class GenericBook {
 
 	@Id

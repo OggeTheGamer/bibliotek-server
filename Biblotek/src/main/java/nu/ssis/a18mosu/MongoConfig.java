@@ -16,7 +16,7 @@ public class MongoConfig extends AbstractMongoConfiguration {
   
     @Override
     protected String getMappingBasePackage() {
-        return "nu.ssis.a18mosu";
+        return "nu.ssis.a18mosu.model";
     }
 
 	@Override

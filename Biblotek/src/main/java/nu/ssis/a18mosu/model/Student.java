@@ -9,7 +9,8 @@ import lombok.Data;
 public class Student {
 	
 	@Id 
-	private String rfid;
+	private String id;
 	private String emailAdress;
+	private String name;
 
 }
