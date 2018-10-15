@@ -19,7 +19,7 @@ import nu.ssis.a18mosu.service.EmailService;
 import nu.ssis.a18mosu.service.LoanService;
 
 @Controller
-public class WebController {
+public class BookController {
 
 	@Autowired
 	private BookService bookService;
@@ -33,11 +33,7 @@ public class WebController {
 		GenericBook book = bookService.getGenericBook(isbn);
 		model.addAttribute("book", book);
 		model.addAttribute("status", loanService.genericBookStatus(isbn).toString()); //TODO
-		try {
-			emailService.sendThanksMail(getExampleLoan(book));
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
+		
 		return "book.html";
 	}
 	
@@ -53,10 +49,15 @@ public class WebController {
 		return loan;
 	}
 
-	@GetMapping("/book/{bookId}/loan")
+	@GetMapping("/book/loan/{bookId}")
 	public Object loanBook(@PathVariable("bookId") String bookId, Model model, DefaultOidcUser p) {
-		model.addAttribute("userAttributes", p.getAttributes());
-		return "user/user.html";
+		Book book = bookService.getBook(bookId);
+		try {
+			emailService.sendThanksMail(getExampleLoan(book.getBook()));
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		return "book.html";
 	}
 
 	@GetMapping("/")
