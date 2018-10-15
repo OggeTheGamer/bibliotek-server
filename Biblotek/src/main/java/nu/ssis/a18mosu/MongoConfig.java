@@ -19,8 +19,8 @@ public class MongoConfig extends AbstractMongoConfiguration {
         return "nu.ssis.a18mosu.model";
     }
 
-	@Override
-	public @Bean MongoClient mongoClient() {
+	@Override @Bean
+	public MongoClient mongoClient() {
 		return new MongoClient("127.0.0.1", 27017);
 	}
 }

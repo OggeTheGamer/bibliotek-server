@@ -6,6 +6,5 @@ import nu.ssis.a18mosu.model.GenericBook;
 
 public interface GenericBookRepository extends MongoRepository<GenericBook, String> {
 	
-	
 
 }

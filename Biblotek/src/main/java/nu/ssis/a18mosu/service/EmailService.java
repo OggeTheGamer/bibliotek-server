@@ -19,7 +19,7 @@ import org.thymeleaf.context.Context;
 import nu.ssis.a18mosu.model.Loan;
 
 @Component
-public class EmailServiceImp {
+public class EmailService {
 
 	@Bean
 	public JavaMailSender getJavaMailSender() {
@@ -28,7 +28,7 @@ public class EmailServiceImp {
 		mailSender.setPort(587);
 
 		mailSender.setUsername("movitz.sunar@gmail.com");
-		mailSender.setPassword("nope haha");
+		mailSender.setPassword("");
 
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");
@@ -40,26 +40,38 @@ public class EmailServiceImp {
 	}
 
 	@Autowired
-	public JavaMailSender emailSender;
+	private JavaMailSender emailSender;
 
 	@Autowired
 	private TemplateEngine templateEngine;
 
-	private String build(Loan loan) {
-		Context context = new Context();
-		context.setVariable("loan", loan);
-		return templateEngine.process("emails/thanks.html", context);
-	}
-
 	public void sendThanksMail(Loan loan) throws MessagingException {
-		// Get the default Session object.
-	    Session session = Session.getDefaultInstance(new Properties());
+	    Session session = Session.getDefaultInstance(new Properties()); //XXX vilka är dessa properties och session? it works
 		MimeMessage m = new MimeMessage(session);
-		String messageText = build(loan);
-		m.setText(messageText);
-		m.setContent(messageText, "text/html");
 		m.setSubject("Trevlig läsning!");
 		m.addRecipient(Message.RecipientType.TO, new InternetAddress(loan.getLoanTaker().getEmailAdress()));
+		
+		Context context = new Context();
+		context.setVariable("loan", loan);
+		String messageText =  templateEngine.process("emails/thanks.html", context);
+		
+		m.setText(messageText);
+		m.setContent(messageText, "text/html");
+		emailSender.send(m);
+	}
+	
+	public void sendReturnMail(Loan loan) throws MessagingException {
+	    Session session = Session.getDefaultInstance(new Properties());
+		MimeMessage m = new MimeMessage(session);
+		m.setSubject("Dags att lämna tillbaka din bok!");
+		m.addRecipient(Message.RecipientType.TO, new InternetAddress(loan.getLoanTaker().getEmailAdress()));
+		
+		Context context = new Context();
+		context.setVariable("loan", loan);
+		String messageText =  templateEngine.process("emails/return.html", context);
+		
+		m.setText(messageText);
+		m.setContent(messageText, "text/html");
 		emailSender.send(m);
 	}
 

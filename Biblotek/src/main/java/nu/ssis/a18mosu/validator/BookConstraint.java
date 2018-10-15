@@ -43,7 +43,9 @@ class LoanConstraintValidator implements ConstraintValidator<BookConstraint, Str
 	
 	@Override
 	public boolean isValid(String isbn, ConstraintValidatorContext context) {
-		return loanService.status(isbn) == bc.status();
+	
+		return true;
+		//	return loanService.bookStatus(isbn) == bc.status();
 	}
 	
 }

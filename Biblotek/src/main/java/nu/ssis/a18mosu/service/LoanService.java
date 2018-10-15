@@ -6,19 +6,18 @@ import static nu.ssis.a18mosu.model.Book.BookStatus.NOT_FOUND;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import nu.ssis.a18mosu.model.Book;
 import nu.ssis.a18mosu.model.Book.BookStatus;
+import nu.ssis.a18mosu.model.LibraryUser;
 import nu.ssis.a18mosu.model.Loan;
-import nu.ssis.a18mosu.model.Student;
 import nu.ssis.a18mosu.repository.BookRepository;
 import nu.ssis.a18mosu.repository.GenericBookRepository;
+import nu.ssis.a18mosu.repository.LibraryUserRepository;
 import nu.ssis.a18mosu.repository.LoanRepository;
-import nu.ssis.a18mosu.repository.StudentRepository;
 
 @Service
 public class LoanService {
@@ -26,35 +25,51 @@ public class LoanService {
 	@Autowired
 	private LoanRepository loanRepo;
 	@Autowired
-	private StudentRepository studentRepo;
+	private LibraryUserRepository libraryUserRepo;
 	@Autowired
 	private BookRepository bookRepo;
+	@Autowired
+	private GenericBookRepository genericBookRepo;
 	
-	public void loanBook(final String rfid, final String isbn) {
+	public void loanBook(final String studentId, final String bookId) {
 		Loan loan = new Loan();
-		Student student = studentRepo.findById(rfid).get();
-		loan.setBook(bookRepo.findById(isbn).get());
+		LibraryUser student = libraryUserRepo.findById(studentId).get();
+		loan.setBook(bookRepo.findById(bookId).get());
 		loan.setLoanedDate(new Date());
-		loan.setLoanedTo(student);
+		loan.setLoanTaker(student);
 		loan.setReturned(false);
+		Book b = bookRepo.findById(bookId).get();
+		b.setAvaliable(false);
+		bookRepo.save(b);
 		loanRepo.save(loan);
 	}
 	
 	public boolean returnBook(final String bookId) {
-		List<Loan> loans = loanRepo.findActiveLoanById(bookId);
-		if(status(bookId) != LOANED) {
+		if(bookStatus(bookId) != LOANED) {
 			return false;
 		}
+		List<Loan> loans = loanRepo.findActiveByBookId(bookId);
 		Loan loan = loans.get(0);
 		loan.setReturnedDate(new Date());
 		loan.setReturned(true);
 		loanRepo.save(loan);
+		Book b = bookRepo.findById(bookId).get();
+		b.setAvaliable(true);
+		bookRepo.save(b);
 		return true;
 	}
 	
-	public BookStatus status(final String bookId) {
+	public BookStatus bookStatus(final String bookId) {
 		if(bookRepo.existsById(bookId)) {
-			return loanRepo.findActiveLoanById(bookId).size() > 0 ? LOANED : AVALIABLE;
+			return loanRepo.findActiveByBookId(bookId).size() > 0 ? LOANED : AVALIABLE;
+		} else {
+			return NOT_FOUND;
+		}
+	}
+	
+	public BookStatus genericBookStatus(final String isbn) {
+		if(bookRepo.existsById(isbn)) {
+			return bookRepo.findAvaliableBooksByIsbn(isbn).size() < 0 ? LOANED : AVALIABLE;
 		} else {
 			return NOT_FOUND;
 		}

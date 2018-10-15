@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <header th:replace="fragments/general.html :: header"></header>
+    <h1>Dina lån</h1>
+    <div th:each="loan : ${loans}">
+      <p th:text="${loan.book.book.title}">Boktitel</p>
+      <p>Lånad den <span th:text="loan.loanedAt">00/00/00</span></p>
+    </div>
+    <div th:replace="fragments/general.html :: footer"></div>
+  </body>
+</html>

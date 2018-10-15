@@ -15,6 +15,7 @@ public class Book {
 	private String id;
 	@DBRef
 	private GenericBook book;
+	private Boolean avaliable;
 	private Date registeredDate;
 	
 	public enum BookStatus {

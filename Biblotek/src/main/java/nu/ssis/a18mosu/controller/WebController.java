@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import nu.ssis.a18mosu.model.Book;
 import nu.ssis.a18mosu.model.GenericBook;
+import nu.ssis.a18mosu.model.LibraryUser;
 import nu.ssis.a18mosu.model.Loan;
-import nu.ssis.a18mosu.model.Student;
 import nu.ssis.a18mosu.service.BookService;
-import nu.ssis.a18mosu.service.EmailServiceImp;
+import nu.ssis.a18mosu.service.EmailService;
 import nu.ssis.a18mosu.service.LoanService;
 
 @Controller
@@ -26,14 +26,23 @@ public class WebController {
 	@Autowired
 	private LoanService loanService;
 	@Autowired
-	private EmailServiceImp emailService;
+	private EmailService emailService;
 
 	@GetMapping("/book/{isbn}")
 	public String specificBook(@PathVariable("isbn") String isbn, Model model) {
 		GenericBook book = bookService.getGenericBook(isbn);
 		model.addAttribute("book", book);
 		model.addAttribute("status", loanService.genericBookStatus(isbn).toString()); //TODO
-		Student student = new Student();
+		try {
+			emailService.sendThanksMail(getExampleLoan(book));
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		return "book.html";
+	}
+	
+	private Loan getExampleLoan(GenericBook book) {
+		LibraryUser student = new LibraryUser();
 		student.setEmailAdress("movitz.sunar@gmail.com");
 		student.setName("Movitz Sunar");
 		Loan loan = new Loan();
@@ -41,18 +50,13 @@ public class WebController {
 		Book b = new Book();
 		b.setBook(book);
 		loan.setBook(b);
-		try {
-			emailService.sendThanksMail(loan);
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-		return "book.html";
+		return loan;
 	}
 
 	@GetMapping("/book/{bookId}/loan")
 	public Object loanBook(@PathVariable("bookId") String bookId, Model model, DefaultOidcUser p) {
 		model.addAttribute("userAttributes", p.getAttributes());
-		return "user.html";
+		return "user/user.html";
 	}
 
 	@GetMapping("/")

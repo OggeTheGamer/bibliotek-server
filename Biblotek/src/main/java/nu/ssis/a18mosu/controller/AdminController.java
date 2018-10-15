@@ -1,5 +1,7 @@
 package nu.ssis.a18mosu.controller;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +22,17 @@ public class AdminController {
 	private BookService bookService;
 
 	@PostMapping("/admin/registerbook")
-	public String registerBook(@Valid @ModelAttribute("book") BookRegisterDTO book, BindingResult result, Model model) {
+	public String registerBook(
+			@Valid @ModelAttribute("book") BookRegisterDTO book, 
+			BindingResult result,
+			Model model,
+			Principal principal) {
 		if(result.hasErrors()) {
-			model.addAttribute("message", result.getAllErrors().stream().map(e -> e.getCode()).reduce("", (a, b) -> a + " " + b));
+			model.addAttribute("message", "error occurred");
 		} else {
 			bookService.registerBook(book.getIsbn(), book.getId());
 		}
-		model.addAttribute("book", new BookRegisterDTO());
+		
 		return "registerbook.html";
 	}
 	

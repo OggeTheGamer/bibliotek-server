@@ -9,7 +9,9 @@ import nu.ssis.a18mosu.model.Loan;
 
 public interface LoanRepository extends MongoRepository<Loan, String>{
 
-	@Query("{\"book.$id\":?0, returned:false}")
-	List<Loan> findActiveLoanById(String bookId);
+	
+	@Query("{\"book.$id\":?0, avaliable:true}")
+	List<Loan> findActiveByBookId(String bookId);
+
 
 }

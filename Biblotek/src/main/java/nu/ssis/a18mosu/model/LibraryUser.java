@@ -5,12 +5,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
 
-@Data @Document(collection="students")
-public class Student {
+@Data @Document(collection="users")
+public class LibraryUser {
 	
 	@Id 
 	private String id;
 	private String emailAdress;
 	private String name;
+	private UserSettings userSettings;
 
 }
