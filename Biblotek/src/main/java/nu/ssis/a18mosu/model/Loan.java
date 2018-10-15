@@ -16,7 +16,7 @@ public class Loan {
 	@DBRef
 	private Book book;
 	@DBRef
-	private Student loanedTo;
+	private Student loanTaker;
 	private Date loanedDate;
 	private Date returnedDate;
 	private Boolean returned;
