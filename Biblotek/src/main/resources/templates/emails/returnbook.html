@@ -274,7 +274,7 @@ a[x-apple-data-detectors=true] {
                     <div class="">
 	<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;"><![endif]-->
 	<div style="color:#134C75;font-family:'Bitter', Georgia, Times, 'Times New Roman', serif;line-height:120%; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">
-		<div style="font-size:12px;line-height:14px;font-family:Bitter, Georgia, Times, 'Times New Roman', serif;color:#134C75;text-align:left;"><p style="margin: 0;font-size: 14px;line-height: 17px"><strong><span style="font-size: 28px; line-height: 33px;">Trevlig läsning <span th:text="${loan.loanTaker.name}">Namn Efternamn</span>!</span></strong></p></div>
+		<div style="line-height:14px;font-family:Bitter, Georgia, Times, 'Times New Roman', serif;font-size:12px;color:#134C75;text-align:left;"><p style="margin: 0;line-height: 14px;font-size: 12px"><span style="font-size: 28px; line-height: 33px;"><strong>Imorgon går ditt lån ut!</strong></span></p></div>
 	</div>
 	<!--[if mso]></td></tr></table><![endif]-->
 </div>
@@ -283,7 +283,7 @@ a[x-apple-data-detectors=true] {
                     <div class="">
 	<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;"><![endif]-->
 	<div style="color:#555555;font-family:'Open Sans', Helvetica, Arial, sans-serif;line-height:150%; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">
-		<div style="font-size:12px;line-height:18px;color:#555555;font-family:'Open Sans', Helvetica, Arial, sans-serif;text-align:left;"><p style="margin: 0;font-size: 14px;line-height: 21px">Du har lånat <span th:text="${loan.book.book.title}">Boktitel</span> från SSIS bibliotek, glöm inte att lämna tillbaka den innan 00/00/00 (om 30 dagar).</p></div>
+		<div style="font-size:12px;line-height:18px;color:#555555;font-family:'Open Sans', Helvetica, Arial, sans-serif;text-align:left;"><p style="margin: 0;font-size: 14px;line-height: 21px">Vid 00/00/00 lånade du <span th:text="${loan.book.book.titel}">Boktitel</span> . Nu är det dags att lämna tillbaka den!</p></div>
 	</div>
 	<!--[if mso]></td></tr></table><![endif]-->
 </div>
@@ -291,9 +291,9 @@ a[x-apple-data-detectors=true] {
 
 
 <div align="left" class="button-container left " style="padding-right: 10px; padding-left: 10px; padding-top:10px; padding-bottom:10px;">
-  <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top:10px; padding-bottom:10px;" align="left"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://example.com" style="height:39pt; v-text-anchor:middle; width:87pt;" arcsize="49%" strokecolor="#3AAEE0" fillcolor="#3AAEE0"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#ffffff; font-family:'Open Sans', Helvetica, Arial, sans-serif; font-size:16px;"><![endif]-->
+  <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top:10px; padding-bottom:10px;" align="left"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://example.com" style="height:36pt; v-text-anchor:middle; width:87pt;" arcsize="53%" strokecolor="#3AAEE0" fillcolor="#3AAEE0"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#ffffff; font-family:'Open Sans', Helvetica, Arial, sans-serif; font-size:16px;"><![endif]-->
     <a href="http://example.com" target="_blank" style="display: block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #ffffff; background-color: #3AAEE0; border-radius: 25px; -webkit-border-radius: 25px; -moz-border-radius: 25px; max-width: 116px; width: 56px;width: auto; border-top: 0px solid transparent; border-right: 0px solid transparent; border-bottom: 0px solid transparent; border-left: 0px solid transparent; padding-top: 10px; padding-right: 30px; padding-bottom: 10px; padding-left: 30px; font-family: 'Open Sans', Helvetica, Arial, sans-serif;mso-border-alt: none">
-      <span style="font-family:'Open Sans', Helvetica, Arial, sans-serif;font-size:16px;line-height:32px;"><span style="font-size: 14px;">Visa lån</span></span>
+      <span style="font-family:'Open Sans', Helvetica, Arial, sans-serif;font-size:16px;line-height:32px;"><span style="font-size: 14px; line-height: 28px;">Visa lån</span></span>
     </a>
   <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
 </div>
@@ -305,11 +305,11 @@ a[x-apple-data-detectors=true] {
     <tbody>
         <tr style="vertical-align: top">
             <td class="divider_inner" style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-right: 10px;padding-left: 10px;padding-top: 30px;padding-bottom: 30px;min-width: 100%;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
-                <table class="divider_content" height="0px" align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: 1px solid #DDDDDD;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
+                <table class="divider_content" align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: 1px solid #DDDDDD;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
                     <tbody>
                         <tr style="vertical-align: top">
-                            <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;font-size: 0px;line-height: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
-                                <span>&#160;</span>
+                            <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
+                                <span></span>
                             </td>
                         </tr>
                     </tbody>
@@ -323,10 +323,30 @@ a[x-apple-data-detectors=true] {
                     <div class="">
 	<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;"><![endif]-->
 	<div style="color:#555555;font-family:'Open Sans', Helvetica, Arial, sans-serif;line-height:180%; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">
-		<div style="font-size:12px;line-height:22px;color:#555555;font-family:'Open Sans', Helvetica, Arial, sans-serif;text-align:left;"><p style="margin: 0;font-size: 14px;line-height: 25px"><em>Har du inte lånat denna bok? Kontakta admins på <a style="color:#8F8F8F;text-decoration: underline;" title="18mosu@stockholmscience.se" href="mailto:18mosu@stockholmscience.se?subject=Bibliotek problem!&amp;body=Jag fick ett oväntat mejl från biblioteket...">18mosu@stockholmscience.se</a></em></p></div>
+		<div style="font-size:12px;line-height:22px;color:#555555;font-family:'Open Sans', Helvetica, Arial, sans-serif;text-align:left;"><p style="margin: 0;font-size: 12px;line-height: 22px">Har du inte lånat denna bok? Kontakta admins på <a style="color:#8F8F8F;text-decoration: underline;" title="18mosu@stockholmscience.se" href="mailto:18mosu@stockholmscience.se?subject=Bibliotek problem!&amp;body=Jag fick ett oväntat mejl från biblioteket....">18mosu@stockholmscience.se</a></p></div>
 	</div>
 	<!--[if mso]></td></tr></table><![endif]-->
 </div>
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="divider " style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;min-width: 100%;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
+    <tbody>
+        <tr style="vertical-align: top">
+            <td class="divider_inner" style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-right: 25px;padding-left: 25px;padding-top: 25px;padding-bottom: 25px;min-width: 100%;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
+                <table class="divider_content" align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: 0px solid transparent;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
+                    <tbody>
+                        <tr style="vertical-align: top">
+                            <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
+                                <span></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
               <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
               </div>
@@ -349,7 +369,7 @@ a[x-apple-data-detectors=true] {
                     <div class="">
 	<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;"><![endif]-->
 	<div style="color:#8F8F8F;font-family:'Open Sans', Helvetica, Arial, sans-serif;line-height:120%; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">
-		<div style="font-size:12px;line-height:14px;color:#8F8F8F;font-family:'Open Sans', Helvetica, Arial, sans-serif;text-align:left;"><p style="margin: 0;font-size: 14px;line-height: 17px"><span style="font-size: 11px; line-height: 13px;">Vill du inte ha dessa mejl? Konfigurera <a style="color:#8F8F8F;text-decoration: underline;" href="https://bibliotek.ssis.nu/user/settings" target="_blank" rel="noopener">mejlinställningar</a>&#160;på hemsidan.</span></p></div>
+		<div style="line-height:14px;font-size:12px;color:#8F8F8F;font-family:'Open Sans', Helvetica, Arial, sans-serif;text-align:left;"><p style="margin: 0;line-height: 14px;font-size: 12px"><span style="font-size: 11px; line-height: 13px;">Vill du inte ha dessa melj? Konfigurera <a style="color:#8F8F8F;text-decoration: underline;" href="https://bibliotek.ssis.nu/user/settings" target="_blank" rel="noopener">mejlinställningar</a> på hemsidan.</span></p></div>
 	</div>
 	<!--[if mso]></td></tr></table><![endif]-->
 </div>
