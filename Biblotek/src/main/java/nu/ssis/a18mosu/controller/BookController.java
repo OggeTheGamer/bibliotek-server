@@ -4,7 +4,7 @@ import javax.mail.MessagingException;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import nu.ssis.a18mosu.datatransferobject.UpdateBookDTO;
 import nu.ssis.a18mosu.model.GenericBook;
-import nu.ssis.a18mosu.model.LibraryUser;
 import nu.ssis.a18mosu.model.Loan;
 import nu.ssis.a18mosu.service.BookService;
 import nu.ssis.a18mosu.service.EmailService;
@@ -38,28 +37,24 @@ public class BookController {
 	public String specificBook(@PathVariable("isbn") String isbn, Model model) {
 		GenericBook book = bookService.getGenericBook(isbn);
 		model.addAttribute("book", book);
-		model.addAttribute("status", loanService.genericBookStatus(isbn).toString()); //TODO
-		
+		model.addAttribute("status", loanService.genericBookStatus(isbn).toString()); // TODO
+
 		return "book.html";
 	}
-	
+
 	@GetMapping("/book/{isbn}/edit")
-	public String getEditPage(
-			@PathVariable("isbn") String isbn, 
-			Model model) {
+	public String getEditPage(@PathVariable("isbn") String isbn, Model model) {
 		GenericBook genericBook = bookService.getGenericBook(isbn);
 		UpdateBookDTO updateBookDto = new UpdateBookDTO();
 		modelMapper.map(genericBook, updateBookDto);
 		model.addAttribute("updateBookDto", updateBookDto);
 		return "editbook.html";
 	}
-	
+
 	@PostMapping("/book/{isbn}/edit")
-	public String editGenericBook(
-			@PathVariable("isbn") String isbn, 
-			Model model, 
+	public String editGenericBook(@PathVariable("isbn") String isbn, Model model,
 			@ModelAttribute UpdateBookDTO updateBookDto) {
-		
+
 		GenericBook genericBook = bookService.getGenericBook(isbn);
 		modelMapper.map(updateBookDto, genericBook);
 		bookService.updateGenericBook(genericBook);
@@ -79,12 +74,15 @@ public class BookController {
 	}
 
 	@GetMapping("/")
-	@ResponseBody
 	public String index(@RequestParam(defaultValue = "0") int page, Model model) {
 		model.addAttribute("books", bookService.getPage(page));
-		
-		return ((LibraryUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getClass().getName();
-//		return "index.html";
+		return "index.html";
 	}
-	
+
+	@GetMapping("/useruser")
+	@ResponseBody
+	public String home(OAuth2AuthenticationToken authentication) {
+		return authentication.getPrincipal().getClass().getName() + "\nSuccess. " + authentication.getPrincipal().getAttributes().toString();
+	}
+
 }

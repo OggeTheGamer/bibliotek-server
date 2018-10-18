@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import com.mongodb.MongoClient;
 
 @Configuration
-public class MongoConfig extends AbstractMongoConfiguration {
+public class MongoDBConfiguration extends AbstractMongoConfiguration {
   
     @Override
     protected String getDatabaseName() {

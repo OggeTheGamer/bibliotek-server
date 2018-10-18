@@ -31,7 +31,7 @@ public class LoanService {
 	@Autowired
 	private GenericBookRepository genericBookRepo;
 	
-	public void loanBook(final String studentId, final String bookId) {
+	public Loan loanBook(final String studentId, final String bookId) {
 		Loan loan = new Loan();
 		LibraryUser student = libraryUserRepo.findById(studentId).get();
 		loan.setBook(bookRepo.findById(bookId).get());
@@ -41,7 +41,7 @@ public class LoanService {
 		Book b = bookRepo.findById(bookId).get();
 		b.setAvaliable(false);
 		bookRepo.save(b);
-		loanRepo.save(loan);
+		return loanRepo.insert(loan);
 	}
 	
 	public boolean returnBook(final String bookId) {
@@ -68,7 +68,7 @@ public class LoanService {
 	}
 	
 	public BookStatus genericBookStatus(final String isbn) {
-		if(bookRepo.existsById(isbn)) {
+		if(genericBookRepo.existsById(isbn)) {
 			return bookRepo.findAvaliableBooksByIsbn(isbn).size() < 0 ? LOANED : AVALIABLE;
 		} else {
 			return NOT_FOUND;
