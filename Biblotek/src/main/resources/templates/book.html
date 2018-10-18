@@ -12,12 +12,14 @@
   </head>
   <body>
     <div th:replace="fragments/general :: header"></div>
-
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{edit}" href="editbook.html">Redigera bok</a>
+    <a href="#" th:href="@{loan}" sec:authorize="hasRole('ROLE_USER')">Låna bok</a>
     <div class="book">
       <img th:src="${book.image}" src="http://books.google.com/books/content?id=SJnHBAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" alt="Book cover">
       <h1 th:text="${book.title}">Bok titel</h1>
       <h2>Skriven av: <span th:text="${book.authors}">Namn Efternamn</span></h2>
       <p>
+        <p th:text="${status}"></p>
         <div th:switch="${status}">
           <span th:case="'AVALIABLE'">Status: tillgänglig</span>
           <span th:case="'LOANED'">Status: lånad</span>

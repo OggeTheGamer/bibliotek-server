@@ -5,12 +5,15 @@
     <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
   </head>
   <body>
+
     <header th:fragment="header">
       <h1>SSIS Bibliotek</h1>
       <nav>
         <ol>
           <li><a th:href="@{/}">Hem</a></li>
-          <li><a href="/oauth2/authorization/google">Logga in</a></li>
+          <li sec:authorize="isAuthenticated() == false"><a th:href="@{/oauth2/authorization/google}" href="#">Logga in</a></li>
+          <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" href="#">Logga ut</a></li>
+          <li sec:authorize="hasRole('ROLE_ADMIN')"> <a href="#">admin</a> </li>
         </ol>
       </nav>
     </header>

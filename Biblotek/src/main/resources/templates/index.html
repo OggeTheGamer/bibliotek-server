@@ -29,7 +29,7 @@
     <div id="books">
       <div class="book" th:each="book : ${books}">
         <img th:src="${book.image}" src="" alt="Book cover">
-        <a th:text="${book.title}" th:href="@{'/book/'+${book.isbn}}">Bok titel</a>
+        <a th:text="${book.title}" th:href="@{'/book/'+${book.isbn}+'/'}">Bok titel</a>
       </div>
     </div>
     <div th:replace="fragments/general.html :: footer"></div>

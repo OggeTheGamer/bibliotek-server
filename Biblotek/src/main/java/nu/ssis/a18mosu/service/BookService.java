@@ -34,12 +34,12 @@ public class BookService {
 
 	public void registerBook(final String isbn, final String bookId) {
 		GenericBook genericBook = genericBookRepo.findById(isbn)
-				.orElse(genericBookRepo.save(getRemoteGenericBook(isbn)));
+				.orElse(genericBookRepo.insert(getRemoteGenericBook(isbn)));
 		Book book = new Book();
 		book.setRegisteredDate(new Date());
 		book.setBook(genericBook);
 		book.setId(bookId);
-		bookRepo.save(book);
+		bookRepo.insert(book);
 	}
 
 	public Page<GenericBook> getPage(final int page) {
@@ -56,6 +56,10 @@ public class BookService {
 			gBook.setTitle("Okänd title");
 			return gBook;
 		}
+	}
+
+	public void updateGenericBook(GenericBook genericBook) {
+		genericBookRepo.save(genericBook);		
 	}
 
 }
