@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head th:insert="fragments/general.html :: head">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div th:replace="fragments/general.html :: header"></div>
+    <h1>Error: <span th:text="${code}">000</span></h1>
+    <div th:switch="${code}">
+      <div th:case="404">
+        <h1>Det du letade efter hittades inte på servern :(</h1>
+        <img th:src="@{/images/developers.gif}" src="../../static/images/developers.gif" alt="Developers...">
+      </div>
+      <div th:case="401">
+        <h1>Du har inte tillgång till detta</h1>
+        <img th:src="@{/images/accessdenied.gif}" src="../../static/images/accessdenied.gif" alt="You didn't say the magic word!">
+      </div>
+    </div>
+
+    <div th:replace="fragments/general.html :: footer"></div>
+  </body>
+</html>
