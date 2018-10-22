@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <title></title>
-    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <div th:replace="fragments/general.html :: head"></div>
+    <title th:text="${book.title}">Boktitel</title>
     <meta property="og:title" data-th-attr="content=${book.title}" content="Book title" />
     <meta property="og:type" content="book" />
     <meta property="og:image" data-th-attr="content=${book.image}" content="" />
@@ -12,12 +10,14 @@
   </head>
   <body>
     <div th:replace="fragments/general :: header"></div>
-
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{edit}" href="editbook.html">Redigera bok</a>
+    <a href="#" th:href="@{loan}" sec:authorize="hasRole('ROLE_USER')">Låna bok</a>
     <div class="book">
       <img th:src="${book.image}" src="http://books.google.com/books/content?id=SJnHBAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" alt="Book cover">
       <h1 th:text="${book.title}">Bok titel</h1>
       <h2>Skriven av: <span th:text="${book.authors}">Namn Efternamn</span></h2>
       <p>
+        <p th:text="${status}"></p>
         <div th:switch="${status}">
           <span th:case="'AVALIABLE'">Status: tillgänglig</span>
           <span th:case="'LOANED'">Status: lånad</span>

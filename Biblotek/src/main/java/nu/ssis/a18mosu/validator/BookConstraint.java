@@ -23,7 +23,7 @@ import nu.ssis.a18mosu.service.LoanService;
 @Constraint(validatedBy = LoanConstraintValidator.class)
 public @interface BookConstraint {
 
-	public String message() default "The id you provided was not... TODO errormessages";
+	public String message() default "The id you provided was not... TODO errormessages"; //TODO
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
 	public BookStatus status(); 
@@ -42,10 +42,8 @@ class LoanConstraintValidator implements ConstraintValidator<BookConstraint, Str
 	}
 	
 	@Override
-	public boolean isValid(String isbn, ConstraintValidatorContext context) {
-	
-		return true;
-		//	return loanService.bookStatus(isbn) == bc.status();
+	public boolean isValid(String bookId, ConstraintValidatorContext context) {
+		return loanService.bookStatus(bookId) == bc.status();
 	}
 	
 }

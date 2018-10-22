@@ -20,8 +20,6 @@ public class BookService {
 	@Autowired
 	private BookRepository bookRepo;
 	@Autowired
-	private LoanService loanService;
-	@Autowired
 	private BookApiClient bookApiClient;
 	@Autowired
 	private GenericBookRepository genericBookRepo;
@@ -34,18 +32,18 @@ public class BookService {
 		return genericBookRepo.findById(isbn).get();
 	}
 
-	public void registerBook(final String isbn, final String id) {
-		GenericBook gBook;
-		gBook = genericBookRepo.findById(isbn).orElse(genericBookRepo.save(getRemoteGenericBook(isbn)));
+	public void registerBook(final String isbn, final String bookId) {
+		GenericBook genericBook = genericBookRepo.findById(isbn)
+				.orElse(genericBookRepo.insert(getRemoteGenericBook(isbn)));
 		Book book = new Book();
 		book.setRegisteredDate(new Date());
-		book.setBook(gBook);
-		book.setId(id);
-		bookRepo.save(book);
+		book.setBook(genericBook);
+		book.setId(bookId);
+		bookRepo.insert(book);
 	}
 
 	public Page<GenericBook> getPage(final int page) {
-		return genericBookRepo.findAll(PageRequest.of(page, 5)); //5 för test
+		return genericBookRepo.findAll(PageRequest.of(page, 20));
 	}
 	
 	public GenericBook getRemoteGenericBook(String isbn) {
@@ -60,5 +58,8 @@ public class BookService {
 		}
 	}
 
+	public void updateGenericBook(GenericBook genericBook) {
+		genericBookRepo.save(genericBook);		
+	}
 
 }

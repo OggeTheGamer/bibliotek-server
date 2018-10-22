@@ -49,7 +49,7 @@ public class EmailService {
 	    Session session = Session.getDefaultInstance(new Properties()); //XXX vilka är dessa properties och session? it works
 		MimeMessage m = new MimeMessage(session);
 		m.setSubject("Trevlig läsning!");
-		m.addRecipient(Message.RecipientType.TO, new InternetAddress(loan.getLoanTaker().getEmailAdress()));
+		m.addRecipient(Message.RecipientType.TO, new InternetAddress(loan.getLoanTaker().getEmail()));
 		
 		Context context = new Context();
 		context.setVariable("loan", loan);
@@ -64,8 +64,8 @@ public class EmailService {
 	    Session session = Session.getDefaultInstance(new Properties());
 		MimeMessage m = new MimeMessage(session);
 		m.setSubject("Dags att lämna tillbaka din bok!");
-		m.addRecipient(Message.RecipientType.TO, new InternetAddress(loan.getLoanTaker().getEmailAdress()));
-		
+		m.addRecipient(Message.RecipientType.TO, new InternetAddress(loan.getLoanTaker().getEmail()));
+
 		Context context = new Context();
 		context.setVariable("loan", loan);
 		String messageText =  templateEngine.process("emails/return.html", context);

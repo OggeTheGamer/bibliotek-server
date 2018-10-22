@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <title></title>
+    <div th:replace="fragments/general.html :: head"></div>
+    <title>Profil</title>
   </head>
   <body>
     <header th:replace="fragments/general.html :: header"></header>
-    <h1>Dina lån</h1>
-    <div th:each="loan : ${loans}">
-      <p th:text="${loan.book.book.title}">Boktitel</p>
-      <p>Lånad den <span th:text="loan.loanedAt">00/00/00</span></p>
-    </div>
+    <h1 th:text="${user}"></h1>
     <div th:replace="fragments/general.html :: footer"></div>
   </body>
 </html>

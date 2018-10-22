@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <head th:fragment="head">
+  <head th:fragment="head" th:remove="tag">
+    <meta name="charset" content="utf8">
     <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
     <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <script src="/webjars/js-cookie/2.2.0/js.cookie.js"></script>
+    <script src="/js/main.js"></script>
   </head>
   <body>
     <header th:fragment="header">
@@ -10,8 +13,11 @@
       <nav>
         <ol>
           <li><a th:href="@{/}">Hem</a></li>
-          <li><a href="/oauth2/authorization/google">Logga in</a></li>
+          <li sec:authorize="isAuthenticated()"><a href="#" th:href="@{/user}">Profil</a></li>
+          <li sec:authorize="hasRole('ROLE_ADMIN')"> <a href="#">Administratör</a> </li>
         </ol>
+        <a sec:authorize="isAuthenticated() == false" th:href="@{/oauth2/authorization/google}" href="#">Logga in</a>
+        <button sec:authorize="isAuthenticated()" type="button" name="button" id="logout">Logga ut</button>
       </nav>
     </header>
     <footer>

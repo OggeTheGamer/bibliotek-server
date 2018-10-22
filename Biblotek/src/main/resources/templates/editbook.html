@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <div th:replace="fragments/general.html :: head"></div>
+    <title>Redigera bok</title>
+  </head>
+  <body>
+    <div th:replace="fragments/general :: header"></div>
+    <h1>ISBN: <span th:text="${isbn}">00000000000</span></h1>
+    <div class="book">
+      <form th:object="${updateBookDto}" method="post">
+        <p>
+          <label for="title">Titel: </label>
+          <input th:field="*{title}" type="text">
+        </p>
+        <p>
+          <label for="description">Beskrivning: </label>
+          <textarea th:field="*{description}" type="textbox"></textarea>
+        </p>
+        <p>
+          <label for="authors">Författare: </label>
+          <input th:field="*{authors}" type="text" id="authors" name="" value="">
+        </p>
+        <p>
+          <label for="language">Språk: </label>
+          <input th:field="*{language}" type="text" id="language" name="" value="">
+        </p>
+        <p>
+          <label for="image">Bild: </label>
+          <input th:field="*{image}" type="text" id="image" name="" value="">
+        </p>
+        <input type="submit" name="" value="Uppdatera bok">
+      </form>
+    </div>
+  </body>
+  <div th:replace="fragments/general.html :: footer"></div>
+</html>

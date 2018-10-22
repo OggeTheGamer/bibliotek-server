@@ -1,10 +1,8 @@
   <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <title>index</title>
-    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <div th:replace="fragments/general.html :: head"></div>
+    <title>Hem</title>
     <meta property="og:title" content="SSIS Bibliotek" />
     <meta property="og:type" content="website" />
   </head>
@@ -29,7 +27,7 @@
     <div id="books">
       <div class="book" th:each="book : ${books}">
         <img th:src="${book.image}" src="" alt="Book cover">
-        <a th:text="${book.title}" th:href="@{'/book/'+${book.isbn}}">Bok titel</a>
+        <a th:text="${book.title}" th:href="@{'/book/'+${book.isbn}+'/'}">Bok titel</a>
       </div>
     </div>
     <div th:replace="fragments/general.html :: footer"></div>
