@@ -1,12 +1,14 @@
 package nu.ssis.a18mosu.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import nu.ssis.a18mosu.model.Comment;
 import nu.ssis.a18mosu.model.GenericBook;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -32,6 +34,7 @@ public class BookApiClient {
 		book.setImage(jObject.getJSONObject("imageLinks").getString("thumbnail"));
 		book.setLanguage(jObject.getString("language"));
 		book.setIsbn(isbn);
+		book.setComments(new ArrayList<Comment>());
 		
 		
 		List<Object> authors = jObject.getJSONArray("authors").toList();

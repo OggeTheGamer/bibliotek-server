@@ -1,5 +1,5 @@
-$(
-  () => {
+$(() => {
+
     $.ajaxSetup({
       beforeSend : (xhr, settings) => {
         if (settings.type == 'POST' || settings.type == 'PUT' || settings.type == 'DELETE') {
@@ -17,9 +17,7 @@ $(
           success:() => {
             location.reload(true);
           }
-        }
-      );
-    }
-  );
-}
-);
+        });
+    });
+
+});
