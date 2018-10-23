@@ -7,39 +7,48 @@
     <meta property="og:type" content="book" />
     <meta property="og:image" data-th-attr="content=${book.image}" content="" />
     <meta property="book:isbn" data-th-attr="content=${book.isbn}" content="">
+    <link rel="stylesheet" href="../static/css/master.css">
   </head>
   <body>
     <div th:replace="fragments/general :: header"></div>
-    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{edit}" href="editbook.html">Redigera bok</a>
-    <a href="#" th:href="@{loan}" sec:authorize="hasRole('ROLE_USER')">Låna bok</a>
-    <div class="book">
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row align-items-center mb-3 bg-white box-shadow">
+      <nav class="mr-md-1">
+        <a  class="btn btn-outline-primary" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{edit}" href="editbook.html">Redigera bok</a>
+        <a  class="btn btn-outline-primary" href="#" th:href="@{loan}" sec:authorize="hasRole('ROLE_USER')">Låna bok</a>
+        <a  class="btn btn-outline-primary" href="#" th:href="@{loan}" sec:authorize="hasRole('ROLE_USER')">Återlämna bok</a>
+      </nav>
+      <a  class="btn btn-outline-primary float-right" href="#"  sec:authorize="hasRole('ROLE_USER')">Prenumerera</a>
+    </div>
+    <div class="book" style="margin-top:5px">
       <img th:src="${book.image}" src="http://books.google.com/books/content?id=SJnHBAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" alt="Book cover">
       <h1 th:text="${book.title}">Bok titel</h1>
       <h2>Skriven av: <span th:text="${book.authors}">Namn Efternamn</span></h2>
       <p>
+        <h3>Betyg av skolans elever: <span >0</span>/5</h3>
+      </p>
+      <p>
         <p th:text="${status}"></p>
         <div th:switch="${status}">
-          <span th:case="'AVALIABLE'">Status: tillgänglig</span>
-          <span th:case="'LOANED'">Status: lånad</span>
+          <span th:case="'AVALIABLE'" class="indicator-AVALIABLE">Status: Tillgänglig</span>
+          <span th:case="'LOANED'" class="indicator-LOANED">Status: Lånad</span>
         </div>
       </p>
-      <p><h3><b>Beskrivning</b></h3>
-        <p th:text="${book.description}">
+        <p><h3><b>Beskrivning</b></h3>
+          <p th:text="${book.description}">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
         </p>
-      </p>
+      </div>
     </div>
-
-    <form class="" sec:authorize="isAuthenticated()" th:action="@{'/book/'+${book.isbn}+'/comment/'}" method="post" th:object="${commentDto}">
-      <textarea th:attribute="*{content}" name="content" rows="8" cols="80"></textarea>
-      <input type="submit" name="" value="">
-    </form>
-
-    <div class="" th:each="comment : ${book.comments}">
-      <p th:text="${comment.author.givenName}">username</p>
-      <p th:text="${comment.content}">content</p>
-    </div>
-
-  </body>
+      <form class="" sec:authorize="isAuthenticated()" th:action="@{'/book/'+${book.isbn}+'/comment/'}" method="post" th:object="${commentDto}">
+        <textarea th:attribute="*{content}" name="content" rows="8" cols="80"></textarea>
+        <input type="submit" name="" value="">
+      </form>
+      <div class="" th:each="comment : ${book.comments}">
+        <p th:text="${comment.author.givenName}">username</p>
+        <p th:text="${comment.content}">content</p>
+      </div>
+    </body>
   <div th:replace="fragments/general.html :: footer"></div>
 </html>
