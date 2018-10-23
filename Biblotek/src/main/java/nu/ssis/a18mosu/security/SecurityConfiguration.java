@@ -27,10 +27,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 		.and()
 			.authorizeRequests()
-				.antMatchers("/admin", "/admin/**").hasRole("ADMIN")
+				.antMatchers("/admin", "/admin/**").hasRole("USER")
 				.antMatchers("/user", "/user/**").hasRole("USER")
+				.antMatchers("/book/**/edit", "/book/**/edit/**").hasRole("ADMIN")
+				.antMatchers("/book/**/comment/**").hasRole("USER")
 		.and()
 			.oauth2Login()
+				.loginPage("/")
 				.userInfoEndpoint()
 				.oidcUserService(libraryUserDetailsService);
 		// @formatter:on

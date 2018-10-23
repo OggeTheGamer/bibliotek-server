@@ -1,10 +1,7 @@
 package nu.ssis.a18mosu.security;
 
-import java.util.Arrays;
-import java.util.List;
-
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
@@ -13,18 +10,17 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 
 import nu.ssis.a18mosu.model.LibraryUser;
-import nu.ssis.a18mosu.model.LibraryUser.LibraryUserRole;
-import nu.ssis.a18mosu.model.UserSettings;
 import nu.ssis.a18mosu.repository.LibraryUserRepository;
 
 @Service
 public class LibraryUserDetailsService extends OidcUserService implements UserDetailsService {
 	
-	private static final List<LibraryUserRole> STARTER_ROLES = Arrays.asList(LibraryUser.LibraryUserRole.ROLE_USER);
 	
 	@Autowired
 	private LibraryUserRepository libraryUserRepo;
-
+	@Autowired
+	private ModelMapper modelMapper;
+	
 	@Override
 	public OidcUser loadUser(OidcUserRequest userRequest) {
 		OidcUser user = super.loadUser(userRequest);
@@ -32,18 +28,18 @@ public class LibraryUserDetailsService extends OidcUserService implements UserDe
 		try {
 			loadUserByUsername(sub);
 		} catch (UsernameNotFoundException e) {
-			LibraryUser libraryUser = new LibraryUser();
-			libraryUser.setId(sub);
+			LibraryUser libraryUser = LibraryUser.getDefault();
 			libraryUser.setEmail(user.getEmail());
-			libraryUser.setUserSettings(new UserSettings());
-			libraryUser.setRoles(STARTER_ROLES);
+			libraryUser.setGivenName(user.getGivenName());
+			libraryUser.setFamilyName(user.getFamilyName());
+			libraryUser.setId(sub);
 			libraryUserRepo.insert(libraryUser);
 		}
 		return user;
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+	public LibraryUser loadUserByUsername(String id) throws UsernameNotFoundException {
 		return libraryUserRepo.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 	}
 
