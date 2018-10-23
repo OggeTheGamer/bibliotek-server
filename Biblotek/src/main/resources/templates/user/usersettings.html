@@ -2,11 +2,51 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <title></title>
   </head>
   <body>
-
-    <h1 th:text="${user.userSettings}"></h1>
-
+    <header th:replace="fragments/general.html :: header"></header>
+    <div id="" style="margin-left: 17px; margin-top: 20px">
+      <h3 class="">E-mejl instälningar</h1>
+      <form class="" action="" method="post">
+        <input type="checkbox" name="thanksEmail"><a style="margin-left: 7px">Kryssa i om du vill ha "Tack för att du lånat boken" mejl.</a>
+      <br>
+        <input type="checkbox" name="returnEmail"><a style="margin-left: 7px">Kryssa i om du vill ha "Dags att lämna tillbaka boken" mejl.</a>
+      <br>
+        <input type="checkbox" name="updateEmail"><a style="margin-left: 7px">Kryssa i om du vill ha email om böcker som passar dina genre val.</a>
+        <br>
+          <input type="checkbox" name="freeEmail"><a style="margin-left: 7px">Kryssa i om du vill ha email när en bok du följer blir ledig.</a>
+      <br><br>
+        <input type="submit" class="btn btn-primary"  value="Spara">
+      </form>
+    </div>
+    <br><br>
+    <div id="" style="margin-left: 17px">
+      <h3 class="">Genre preferenser</h1>
+        <form class="" action="" method="post">
+          <input type="checkbox" name="genreSci-Fi"><a style="margin-left: 7px">Sci-Fi</a>
+        <br>
+          <input type="checkbox" name="genreFantasy"><a style="margin-left: 7px">Fantasy</a>
+        <br>
+          <input type="checkbox" name="genre"><a style="margin-left: 7px"></a>
+        <br>
+          <input type="checkbox" name="genre"><a style="margin-left: 7px"></a>
+        <br>
+          <input type="checkbox" name="genre"><a style="margin-left: 7px"></a>
+        <br>
+          <input type="checkbox" name="genre"><a style="margin-left: 7px"></a>
+        <br>
+          <input type="checkbox" name="genre"><a style="margin-left: 7px"></a>
+        <br>
+          <input type="checkbox" name="genre"><a style="margin-left: 7px"></a>
+        <br><br>
+          <input type="submit" class="btn btn-primary" value="Spara">
+        </form>
+      </div>
+    <div th:replace="fragments/general.html :: footer"></div>
   </body>
 </html>

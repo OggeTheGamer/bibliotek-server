@@ -3,10 +3,25 @@
   <head>
     <div th:replace="fragments/general.html :: head"></div>
     <title>Profil</title>
+    <link rel="stylesheet" href="../static/css/master.css">
   </head>
   <body>
     <header th:replace="fragments/general.html :: header"></header>
-    <h1 th:text="${user}"></h1>
+    <div th:fragment="header"></div>
+    <div class="container">
+      <div class="border-bottom">
+        <h1 th:text="${user}">Användarnamn</h1>
+        <br>
+        <p class="border-bottom">Lista på lånade böcker</p>
+        <p>Du har inga lånade böcker</p>
+      </div>
+      <br>
+      <br>
+      <div class="border-bottom">
+        <p class="border-bottom">Lista på prenumererade böcker</p>
+        <p>Du prenumererar inte på några böcker</p>
+      </div>
+    </div>
     <div th:replace="fragments/general.html :: footer"></div>
   </body>
 </html>
