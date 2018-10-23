@@ -17,26 +17,32 @@
 
   </head>
   <body>
-    <header th:fragment="header">
-      <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-        <h5 class="my-0 mr-md-auto font-weight-normal">SSIS Bibliotek</h5>
-        <nav class="my-2 my-md-0 mr-md-3">
-          <a class="p-2 text-dark" th:href="@{/}">Hem</a>
-          <a class="p-2 text-dark" sec:authorize="isAuthenticated()" href="#">Profil</a>
-          <a class="p-2 text-dark" sec:authorize="hasRole('ROLE_ADMIN')" href="#">Administratör</a>
-          <a class="p-2 text-dark" href="#">Slumpmässig bok</a>
-        </nav>
-        <a class="btn btn-outline-primary" sec:authorize="isAuthenticated()" href="#">Logga ut</a>
-        <a class="btn btn-outline-primary" sec:authorize="isAuthenticated() == false" th:href="@{/oauth2/authorization/google}" href="#">Logga in</a>
-      </div>
-    </header>
-    <footer  th:fragment="footer" class="pt-4 my-md-5 pt-md-5 border-top">
-      <div class="row">
-        <div class="col-12 col-md">
-          <img class="mb-2" src="" alt="" width="24" height="24">
-          <small class="d-block mb-3 text-muted">© 2017-2018</small>
+    <div th:fragment="header">
+      <header>
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+          <a class="navbar-brand">
+            <img class="mb-2" src="https://ssis.nu/favicon.png" alt="" width="36" height="36">
+          </a>
+          <h5 class="my-0 mr-md-auto font-weight-normal">SSIS Bibliotek</h5>
+          <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" th:href="@{/}" href="index.html">Hem</a>
+            <a class="p-2 text-dark" sec:authorize="isAuthenticated()" href="#">Profil</a>
+            <a class="p-2 text-dark" sec:authorize="hasRole('ROLE_ADMIN')" href="#">Administratör</a>
+            <a class="p-2 text-dark" href="#">Slumpmässig bok</a>
+          </nav>
+          <a class="btn btn-outline-primary" sec:authorize="isAuthenticated()" href="#">Logga ut</a>
+          <a class="btn btn-outline-primary" sec:authorize="isAuthenticated() == false" th:href="@{/oauth2/authorization/google}" href="#">Logga in</a>
         </div>
-      </div>
-    </footer>
+      </header>
+    </div>
+    <div class="container" th:fragment="footer">
+      <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+          <div class="col-12 col-md">
+            <small class="d-block mb-3 text-muted">© 2017-2018</small>
+          </div>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
