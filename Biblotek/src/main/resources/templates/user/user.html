@@ -3,39 +3,11 @@
   <head>
     <div th:replace="fragments/general.html :: head"></div>
     <title>Profil</title>
-
-    <!--stuff i need-->
-    <meta name="charset" content="utf8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
-    <script src="/webjars/js-cookie/2.2.0/js.cookie.js"></script>
-    <script src="/js/main.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/master.css">
   </head>
   <body>
     <header th:replace="fragments/general.html :: header"></header>
-    <div th:fragment="header">
-      <header>
-        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-          <a class="navbar-brand">
-            <img class="mb-2" src="https://ssis.nu/favicon.png" alt="" width="36" height="36">
-          </a>
-          <h5 class="my-0 mr-md-auto font-weight-normal">SSIS Bibliotek</h5>
-          <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" th:href="@{/}" href="index.html">Hem</a>
-            <a class="p-2 text-dark" sec:authorize="isAuthenticated()" href="#">Profil</a>
-            <a class="p-2 text-dark" sec:authorize="hasRole('ROLE_ADMIN')" href="#">Administratör</a>
-            <a class="p-2 text-dark" href="#">Slumpmässig bok</a>
-          </nav>
-          <a class="btn btn-outline-primary" sec:authorize="isAuthenticated()" href="#">Logga ut</a>
-          <a class="btn btn-outline-primary" sec:authorize="isAuthenticated() == false" th:href="@{/oauth2/authorization/google}" href="#">Logga in</a>
-        </div>
-      </header>
-    </div>
+    <div th:fragment="header"></div>
     <div class="container">
       <div class="border-bottom">
         <h1 th:text="${user}">Användarnamn</h1>
@@ -50,16 +22,6 @@
         <p>Du prenumererar inte på några böcker</p>
       </div>
     </div>
-
     <div th:replace="fragments/general.html :: footer"></div>
-    <div class="container" th:fragment="footer">
-      <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        <div class="row">
-          <div class="col-12 col-md">
-            <small class="d-block mb-3 text-muted">© 2017-2018</small>
-          </div>
-        </div>
-      </footer>
-    </div>
   </body>
 </html>

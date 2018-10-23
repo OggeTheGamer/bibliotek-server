@@ -1,0 +1,15 @@
+.indicator-LOANED {
+  background-color: rgba(240, 0, 0, 1);
+  border: 0px;
+  border-radius: 50px;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.indicator-AVALIABLE {
+  background-color: rgba(0, 190, 0, 1);
+  border: 0px;
+  border-radius: 50px;
+  overflow: hidden;
+  padding: 10px;
+}
