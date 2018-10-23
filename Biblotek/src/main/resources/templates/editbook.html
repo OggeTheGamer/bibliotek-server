@@ -8,7 +8,7 @@
     <div th:replace="fragments/general :: header"></div>
     <h1>ISBN: <span th:text="${isbn}">00000000000</span></h1>
     <div class="book">
-      <form th:object="${updateBookDto}" method="post">
+      <form th:object="${updateBookDto}" method="post" th:action="'/book/'+${isbn}+'/edit/'">
         <p>
           <label for="title">Titel: </label>
           <input th:field="*{title}" type="text">

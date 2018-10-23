@@ -41,15 +41,14 @@
         </p>
       </div>
     </div>
-    <form class="" sec:authorize="isAuthenticated()" th:action="@{'/book/'+${book.isbn}+'/comment/'}" method="post" th:object="${commentDto}">
-      <textarea th:attribute="*{content}" name="content" rows="8" cols="80"></textarea>
-      <input type="submit" name="" value="">
-    </form>
-
-    <div class="" th:each="comment : ${book.comments}">
-      <p th:text="${comment.author.givenName}">username</p>
-      <p th:text="${comment.content}">content</p>
-    </div>
-  </body>
+      <form class="" sec:authorize="isAuthenticated()" th:action="@{'/book/'+${book.isbn}+'/comment/'}" method="post" th:object="${commentDto}">
+        <textarea th:attribute="*{content}" name="content" rows="8" cols="80"></textarea>
+        <input type="submit" name="" value="">
+      </form>
+      <div class="" th:each="comment : ${book.comments}">
+        <p th:text="${comment.author.givenName}">username</p>
+        <p th:text="${comment.content}">content</p>
+      </div>
+    </body>
   <div th:replace="fragments/general.html :: footer"></div>
 </html>

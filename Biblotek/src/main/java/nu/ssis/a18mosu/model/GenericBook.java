@@ -1,9 +1,11 @@
 package nu.ssis.a18mosu.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
@@ -19,6 +21,7 @@ public class GenericBook {
 	private String description;
 	private String language;
 	private Date registeredDate;
+	@DBRef
 	private List<Comment> comments;
 
 }
