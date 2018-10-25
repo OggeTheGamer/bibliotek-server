@@ -39,11 +39,17 @@
         </p>
       </div>
     </div>
-      <form class="" sec:authorize="isAuthenticated()" th:action="@{'/book/'+${book.isbn}+'/comment/'}" method="post" th:object="${commentDto}">
-        <textarea th:attribute="*{content}" name="content" rows="8" cols="80"></textarea>
-        <input type="submit" name="" value="">
-      </form>
-      <div class="" th:each="comment : ${book.comments}">
+      <div class="container">
+        <form sec:authorize="isAuthenticated()" th:action="@{'/book/'+${book.isbn}+'/comment/'}" method="post" th:object="${commentDto}">
+          <h4>Skriv en komentar om boken här!</h3>
+          <textarea class="col-sm-7" th:attribute="*{content}" name="content" rows="4" cols="80"></textarea>
+          <div>
+            <input class="col-sm-3 btn btn-outline-primary" type="submit" name="" value="Komentera">
+          </div>
+        </form>
+      </div>
+      <p class="container border-bottom">Komentarer</p>
+      <div class="container" th:each="comment : ${book.comments}">
         <p th:text="${comment.author.givenName}">username</p>
         <p th:text="${comment.content}">content</p>
       </div>
