@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <div th:replace="fragments/general.html :: head"></div>
+    <title>Redigera bok</title>
+  </head>
+  <body>
+    <div th:replace="fragments/general :: header"></div>
+    <h1 class="col-sm-12">ISBN: <span th:text="${isbn}">00000000000</span></h1>
+    <div class="book col-sm-12">
+      <form th:object="${updateBookDto}" method="post" th:action="'/book/'+${isbn}+'/edit/'">
+        <p>
+          <label class="col-sm-1" for="title">Titel: </label>
+          <input class="col-sm-4" th:field="*{title}" type="text">
+        </p>
+        <p>
+          <label class="col-sm-1" for="description">Beskrivning: </label>
+          <textarea class="col-sm-4" th:field="*{description}" type="textbox"></textarea>
+        </p>
+        <p>
+          <label class="col-sm-1" for="authors">Författare: </label>
+          <input class="col-sm-4" th:field="*{authors}" type="text" id="authors" name="" value="">
+        </p>
+        <p>
+          <label class="col-sm-1" for="language">Språk: </label>
+          <input class="col-sm-4" th:field="*{language}" type="text" id="language" name="" value="">
+        </p>
+        <p>
+          <label class="col-sm-1" for="image">Bild URL: </label>
+          <input class="col-sm-4" th:field="*{image}" type="text" id="image" name="" value="">
+        </p>
+        <input class="col-sm-2 btn btn-outline-primary" type="submit" name="" value="Uppdatera bok">
+      </form>
+    </div>
+    <div th:switch="${code}">
+      <div th:case="200">
+        <div class="alert alert-success alert-dismissible fade show bookRegistration-Alerts" role="alert">
+          <strong>Bok Uppdaterad!</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+      <div th:case="404">
+        <div class="alert alert-danger alert-dismissible fade show bookRegistration-Alerts" role="alert">
+          <strong>Holy guacamole!</strong> Något gick fel... Kod: <strong>401</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+      <div th:case="401">
+        <div class="alert alert-danger alert-dismissible fade show bookRegistration-Alerts" role="alert">
+          <strong>Holy guacamole!</strong> Något gick fel... Kod: <strong>401</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+      <div th:case="403">
+        <div class="alert alert-danger alert-dismissible fade show bookRegistration-Alerts" role="alert">
+          <strong>Holy guacamole!</strong> Något gick fel... Kod: <strong>403</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <div th:replace="fragments/general.html :: footer"></div>
+</html>

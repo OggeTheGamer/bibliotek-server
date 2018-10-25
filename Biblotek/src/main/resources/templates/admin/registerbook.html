@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <div th:replace="fragments/general.html :: head"></div>
+  <title>Registrera bok</title>
+  </head>
+  <body>
+    <div th:replace="fragments/general.html :: header"></div>
+    <div class="conatiner col-sm-12">
+      <h1>Registrera bok</h1>
+      <p th:text="${message}"></p>
+      <form action="#" th:action="@{/admin/registerbook}" th:object="${book}" method="post">
+        <p>
+          <label class="col-1" for="isbn">ISBN: </label>
+          <input class="col-2 bookRegistration-Input-Numbers" id="isbn" type="text" name="isbn" th:field="*{isbn}" autofocus />
+        </p>
+        <p>
+          <label class="col-1" for="id">Bok ID: </label>
+          <input class="col-2 bookRegistration-Input-Numbers" id="id" type="text" name="" value="" th:field="*{id}">
+        </p>
+        <input class="col-1 btn btn-outline-primary" type="submit" value="Registrera"></input>
+      </form>
+    </div>
+    <div th:switch="${code}">
+      <div th:case="200">
+        <div class="alert alert-success alert-dismissible fade show bookRegistration-Alerts" role="alert">
+          <strong>Bok Registrerad!</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+      <div th:case="401">
+        <div class="alert alert-danger alert-dismissible fade show bookRegistration-Alerts" role="alert">
+          <strong>Holy guacamole!</strong> Något gick fel... Kod: <strong>401</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+      <div th:case="403">
+        <div class="alert alert-danger alert-dismissible fade show bookRegistration-Alerts" role="alert">
+          <strong>Holy guacamole!</strong> Något gick fel... Kod: <strong>403</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div th:replace="fragments/general.html :: footer"></div>
+  </body>
+</html>

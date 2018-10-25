@@ -13,3 +13,29 @@
   overflow: hidden;
   padding: 10px;
 }
+
+.bookCover {
+  width: 201px;
+  height: 280px;
+  margin-top: 5px;
+}
+
+.dropdown-MainCss {
+  align: left;
+}
+
+.bookRegistration-Input-Numbers {
+  text-align: center;
+}
+
+.bookRegistration-Alerts {
+  margin-top:12px;
+}
+
+.userSettings-Checkbox-Text {
+  margin-left: 7px;
+}
+
+.userSettings-Checkbox-Save {
+  margin-top: 12px;
+}

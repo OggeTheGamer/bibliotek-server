@@ -5,22 +5,8 @@
     <title>Hem</title>
     <meta property="og:title" content="SSIS Bibliotek" />
     <meta property="og:type" content="website" />
+    <link rel="stylesheet" th:href="@{/css/index.css}" href="../static/css/index.css">
   </head>
-  <style media="screen">
-    .book {
-      width: 20%;
-      flex-shrink: 0;
-      margin-left: 20px;
-      flex-wrap: wrap;
-    }
-    .book img {
-      width: 100%;
-    }
-
-    #books {
-      display: flex;
-    }
-  </style>
   <body>
     <header th:replace="fragments/general.html :: header"></header>
     <h1>Böcker</h1>

@@ -1,0 +1,15 @@
+@media screen {
+  .book {
+    width: 20%;
+    flex-shrink: 0;
+    margin-left: 20px;
+    flex-wrap: wrap;
+  }
+  .book img {
+    width: 100%;
+  }
+
+  #books {
+    display: flex;
+  }
+}
