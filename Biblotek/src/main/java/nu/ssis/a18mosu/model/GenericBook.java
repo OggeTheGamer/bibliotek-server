@@ -1,6 +1,5 @@
 package nu.ssis.a18mosu.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
