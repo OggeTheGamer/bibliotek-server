@@ -51,6 +51,12 @@ public class BookController {
 		return "book.html";
 	}
 	
+	@GetMapping("/book/random")
+	public String specificBook() {
+		String isbn = bookService.getRandomIsbn();
+		return "redirect:/book/" + isbn;
+	}
+	
 	@PostMapping("/book/{isbn}/comment")
 	public String comment(@PathVariable("isbn") String isbn, Model model, @ModelAttribute CommentDTO commentDto, Principal principal) {
 		LibraryUser libraryUser = userService.loadUserByUsername(principal.getName());

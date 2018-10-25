@@ -7,16 +7,15 @@
     <meta property="og:type" content="book" />
     <meta property="og:image" data-th-attr="content=${book.image}" content="" />
     <meta property="book:isbn" data-th-attr="content=${book.isbn}" content="">
-    <link rel="stylesheet" href="../static/css/master.css">
   </head>
   <body>
     <div th:replace="fragments/general :: header"></div>
     <div class="container">
       <div class="d-flex flex-column flex-md-row align-items-center mb-3 bg-white box-shadow">
       <nav class="mr-md-1">
-        <a  class="btn btn-outline-primary" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{edit}" href="editbook.html">Redigera bok</a>
-        <a  class="btn btn-outline-primary" href="#" th:href="@{loan}" sec:authorize="hasRole('ROLE_USER')">Låna bok</a>
-        <a  class="btn btn-outline-primary" href="#" th:href="@{loan}" sec:authorize="hasRole('ROLE_USER')">Återlämna bok</a>
+        <a class="btn btn-outline-primary" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{edit}" href="editbook.html">Redigera bok</a>
+        <a class="btn btn-outline-primary" href="#" th:href="@{loan}" sec:authorize="hasRole('ROLE_USER')">Låna bok</a>
+        <a class="btn btn-outline-primary" href="#" th:href="@{loan}" sec:authorize="hasRole('ROLE_USER')">Återlämna bok</a>
       </nav>
       <a  class="btn btn-outline-primary float-right" href="#"  sec:authorize="hasRole('ROLE_USER')">Prenumerera</a>
     </div>
@@ -28,15 +27,14 @@
         <h3>Betyg av skolans elever: <span >0</span>/5</h3>
       </p>
       <p>
-        <p th:text="${status}"></p>
         <div th:switch="${status}">
           <span th:case="'AVALIABLE'" class="indicator-AVALIABLE">Status: Tillgänglig</span>
           <span th:case="'LOANED'" class="indicator-LOANED">Status: Lånad</span>
         </div>
       </p>
         <p><h3><b>Beskrivning</b></h3>
-          <p class="border-bottom" style="padding-bottom: 5px" th:text="${book.description}">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <p th:text="${book.description}">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
         </p>
       </div>

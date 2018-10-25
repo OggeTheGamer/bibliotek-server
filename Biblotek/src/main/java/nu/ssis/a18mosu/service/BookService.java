@@ -1,24 +1,24 @@
 package nu.ssis.a18mosu.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
-import org.json.JSONException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import nu.ssis.a18mosu.datatransferobject.CommentDTO;
+import nu.ssis.a18mosu.datatransferobject.RemoteGenericBookDTO;
 import nu.ssis.a18mosu.exception.NotFoundException;
 import nu.ssis.a18mosu.model.Book;
 import nu.ssis.a18mosu.model.Comment;
 import nu.ssis.a18mosu.model.GenericBook;
-import nu.ssis.a18mosu.model.LibraryUser;
 import nu.ssis.a18mosu.repository.BookRepository;
-import nu.ssis.a18mosu.repository.CommentRepository;
 import nu.ssis.a18mosu.repository.GenericBookRepository;
 
 @Service
@@ -36,13 +36,17 @@ public class BookService {
 	@Autowired
 	private BookRepository bookRepo;
 	@Autowired
-	private BookApiClient bookApiClient;
-	@Autowired
 	private GenericBookRepository genericBookRepo;
 	@Autowired
-	private CommentRepository commentRepo;
-	@Autowired
 	private ModelMapper modelMapper;
+	private static Random random = new Random();
+	
+	private List<RemoteBookApiClient> bookApiClients;
+	
+	@Autowired
+	public BookService(ApplicationContext applicationContext) {
+		bookApiClients = new ArrayList<RemoteBookApiClient>(applicationContext.getBeansOfType(RemoteBookApiClient.class).values());
+	}
 
 	public Book getBook(final String id) {
 		return bookRepo.findById(id).orElseThrow(()-> new NotFoundException());
@@ -63,16 +67,21 @@ public class BookService {
 	}
 
 	private GenericBook getRemoteGenericBook(String isbn) {
-		try {
-			return bookApiClient.getGenericBook(isbn);
-		} catch (JSONException | IOException e) {
-			GenericBook genericBook = new GenericBook();
-			genericBook.setRegisteredDate(new Date());
-			genericBook.setComments(new ArrayList<Comment>());
-			genericBook.setIsbn(isbn);
-			modelMapper.map(DEFAULT_BOOK, genericBook);
-			return genericBook;
+		GenericBook genericBook = new GenericBook();
+		genericBook.setRegisteredDate(new Date());
+		genericBook.setComments(new ArrayList<Comment>());
+		genericBook.setIsbn(isbn);
+
+		for(RemoteBookApiClient client : bookApiClients) {
+			Optional<RemoteGenericBookDTO> optionalBook = client.getRemoteGenericBook(isbn);
+			if(optionalBook.isPresent()) {
+				modelMapper.map(optionalBook.get(), genericBook);
+				return genericBook;
+			}
 		}
+		
+		modelMapper.map(DEFAULT_BOOK, genericBook);
+		return genericBook;
 	}
 
 	public void updateGenericBook(GenericBook genericBook) {
@@ -81,6 +90,11 @@ public class BookService {
 	
 	public Page<GenericBook> getPage(final int page) {
 		return genericBookRepo.findAll(PageRequest.of(page, 20));
+	}
+
+	public String getRandomIsbn() {
+		int numBooks = (int) genericBookRepo.count();
+		return genericBookRepo.findAll(PageRequest.of(random.nextInt(numBooks), 1)).getContent().get(0).getIsbn();
 	}
 
 }
