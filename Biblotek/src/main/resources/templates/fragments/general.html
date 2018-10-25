@@ -8,9 +8,7 @@
     <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="/webjars/js-cookie/2.2.0/js.cookie.js"></script>
-    <script src="/webjars/popper.js/1.14.4/popper.js">
-
-    </script>
+    <script src="/webjars/popper.js/1.14.4/popper.js"></script>
     <script src="/js/main.js"></script>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/master.css}" href="../static/css/master.css">
@@ -27,9 +25,9 @@
           <div class="dropdown col-">
             <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">=</button>
             <div class="dropdown-menu dropdown-menu-right">
-              <a class="p-2 text-dark dropdown-item" sec:authorize="isAuthenticated()" href="#">Profil</a>
+              <a class="p-2 text-dark dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/user}" href="#">Profil</a>
               <a class="p-2 text-dark dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" href="#">Administratör</a>
-              <a class="p-2 text-dark dropdown-item" href="#">Slumpmässig bok</a>
+              <a class="p-2 text-dark dropdown-item" th:href="@{/book/random}" href="#">Slumpmässig bok</a>
               <div class="dropdown-divider"></div>
               <a class="p-2 text-dark dropdown-item" sec:authorize="isAuthenticated()" href="#">Logga ut</a>
               <a class="p-2 text-dark dropdown-item" sec:authorize="isAuthenticated() == false" th:href="@{/oauth2/authorization/google}" href="#">Logga in</a>
@@ -41,8 +39,8 @@
     <footer class="container-fluid pt-4 my-md-5 pt-md-5 border-top" th:fragment="footer">
       <div class="row">
         <div class="col-12 col-md">
-          <small class="d-block mb-3 text-muted">Programed by Movitz S TE18D</small>
-          <small class="d-block mb-3 text-muted">Designed by Osacr F TE18D</small>
+          <small class="d-block mb-3 text-muted">Biblioteks projekt på SSIS</small>
+          <small class="d-block mb-3 text-muted">2018.10.08 - YYYY.MM.DD</small>
         </div>
       </div>
     </footer>
