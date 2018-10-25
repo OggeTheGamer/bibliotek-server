@@ -92,4 +92,9 @@ public class BookService {
 		return genericBookRepo.findAll(PageRequest.of(page, 20));
 	}
 
+	public String getRandomIsbn() {
+		int numBooks = (int) genericBookRepo.count();
+		return genericBookRepo.findAll(PageRequest.of(random.nextInt(numBooks), 1)).getContent().get(0).getIsbn();
+	}
+
 }

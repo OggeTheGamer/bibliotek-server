@@ -27,7 +27,7 @@
             <a class="p-2 text-dark" th:href="@{/}" href="index.html">Hem</a>
             <a class="p-2 text-dark" sec:authorize="isAuthenticated()" th:href="@{/user}" href="#">Profil</a>
             <a class="p-2 text-dark" sec:authorize="hasRole('ROLE_ADMIN')" href="#">Administratör</a>
-            <a class="p-2 text-dark" href="#">Slumpmässig bok</a>
+            <a class="p-2 text-dark" th:href="@{/book/random}" href="#">Slumpmässig bok</a>
           </nav>
           <a id="logout" class="btn btn-outline-primary" sec:authorize="isAuthenticated()" href="#">Logga ut</a>
           <a class="btn btn-outline-primary" sec:authorize="isAuthenticated() == false" th:href="@{/oauth2/authorization/google}" href="#">Logga in</a>
