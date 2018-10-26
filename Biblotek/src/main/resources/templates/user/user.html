@@ -2,24 +2,111 @@
 <html lang="en" dir="ltr">
   <head>
     <div th:replace="fragments/general.html :: head"></div>
-    <title>Profil</title>
-    <link rel="stylesheet" href="../static/css/master.css">
+  <title>Profil</title>
   </head>
   <body>
-    <header th:replace="fragments/general.html :: header"></header>
-    <div th:fragment="header"></div>
+  <header th:replace="fragments/general.html :: header"></header>
     <div class="container">
       <div class="border-bottom">
-        <h1 th:text="${user}">Användarnamn</h1>
+        <h1>Hej <span th:text="${user}">Användarnamn</span></h1>
         <br>
-        <p class="border-bottom">Lista på lånade böcker</p>
-        <p>Du har inga lånade böcker</p>
-      </div>
-      <br>
-      <br>
-      <div class="border-bottom">
-        <p class="border-bottom">Lista på prenumererade böcker</p>
-        <p>Du prenumererar inte på några böcker</p>
+        <div id="accordion">
+          <div class="card">
+          <button class="btn btn-link text-dark card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <div id="headingOne">
+              <h5 class="mb-0 btn-link text-dark">
+                Lånade Böcker
+              </h5>
+            </div>
+          </button>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+              <div class="card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+              </div>
+            </div>
+          </div>
+            <div class="card">
+            <button class="btn btn-link text-dark card-header" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+              <div id="headingTwo">
+                <h5 class="mb-0 btn-link text-dark">
+                  Böcker Du Följer
+                </h5>
+              </div>
+            </button>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+              <div class="card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+          <button class="btn btn-link text-dark card-header" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+            <div id="headingThree">
+              <h5 class="mb-0 btn-link text-dark">
+                Instälningar
+              </h5>
+            </div>
+          </button>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+              <div class="card-body">
+                <div id="accordionTwo">
+                  <div class="card">
+                  <button class="btn btn-link text-dark card-header" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    <div id="headingFour">
+                      <h5 class="mb-0 btn-link text-dark">
+                        E-mejl Instälningar
+                      </h5>
+                    </div>
+                  </button>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionTwo">
+                      <div class="card-body">
+                          <form class="" action="" method="post">
+                            <div class="">
+                              <input type="checkbox" name="thanksEmail"><a class="userSettings-Checkbox-Text">Kryssa i om du vill ha "Tack för att du lånat boken" mejl.</a></div>
+                            <div class="">
+                              <input type="checkbox" name="returnEmail"><a class="userSettings-Checkbox-Text">Kryssa i om du vill ha "Dags att lämna tillbaka boken" mejl.</a></div>
+                            <div class="">
+                              <input type="checkbox" name="updateEmail"><a class="userSettings-Checkbox-Text">Kryssa i om du vill ha email om böcker som passar dina genre val.</a></div>
+                            <div class="">
+                              <input type="checkbox" name="freeEmail"><a class="userSettings-Checkbox-Text">Kryssa i om du vill ha email när en bok du följer blir ledig.</a></div>
+                          <div class="userSettings-Checkbox-Save">
+                            <input type="submit" class="btn btn-outline-primary col-1"  value="Spara"></div>
+                          </form>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="card">
+                    <button class="btn btn-link text-dark card-header" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                      <div id="headingFive">
+                        <h5 class="mb-0 btn-link text-dark">
+                          Genre Preferenser
+                        </h5>
+                      </div>
+                    </button>
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionTwo">
+                      <div class="card-body">
+                        <form class="" action="" method="post">
+                          <div class="">
+                            <input type="checkbox" name="genreSci-Fi"><a class="userSettings-Checkbox-Text">Sci-Fi</a>
+                          </div>
+                          <div class="">
+                            <input type="checkbox" name="genreFantasy"><a class="userSettings-Checkbox-Text">Fantasy</a>
+                          </div>
+                          <div class="">
+                            <input type="checkbox" name="genre"><a class="userSettings-Checkbox-Text">bla</a>
+                          </div>
+                          <div class="userSettings-Checkbox-Save">
+                            <input type="submit" class="btn btn-outline-primary col-1" value="Spara">
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div th:replace="fragments/general.html :: footer"></div>

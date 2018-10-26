@@ -19,8 +19,8 @@
       </nav>
       <a  class="btn btn-outline-primary float-right" href="#"  sec:authorize="hasRole('ROLE_USER')">Prenumerera</a>
     </div>
-    <div class="book" style="margin-top:5px">
-      <img th:src="${book.image}" src="http://books.google.com/books/content?id=SJnHBAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" alt="Book cover">
+    <div class="book">
+      <img class="bookCover" th:src="${book.image}" src="http://books.google.com/books/content?id=SJnHBAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api" alt="Book cover">
       <h1 th:text="${book.title}">Bok titel</h1>
       <h2>Skriven av: <span th:text="${book.authors}">Namn Efternamn</span></h2>
       <p>
@@ -53,6 +53,6 @@
         <p th:text="${comment.author.givenName}">username</p>
         <p th:text="${comment.content}">content</p>
       </div>
-    </body>
-  <div th:replace="fragments/general.html :: footer"></div>
+    <div th:replace="fragments/general.html :: footer"></div>
+  </body>
 </html>
