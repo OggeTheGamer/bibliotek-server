@@ -23,23 +23,23 @@ public class AdminController {
 
 	@PostMapping("/admin/registerbook")
 	public String registerBook(
-			@Valid @ModelAttribute("book") BookRegisterDTO book, 
+			@Valid @ModelAttribute("bookRegisterDto") BookRegisterDTO bookRegisterDto, 
 			BindingResult result,
 			Model model,
 			Principal principal) {
 		if(result.hasErrors()) {
-			model.addAttribute("message", "error occurred");
+			model.addAttribute("message", "Detta bok-id finns redan i databasen");
 		} else {
-			bookService.registerBook(book.getIsbn(), book.getId());
+			bookService.registerBook(bookRegisterDto);
 		}
 		
-		return "registerbook.html";
+		return "admin/registerbook.html";
 	}
 	
 	@GetMapping("/admin/registerbook")
 	public String getRegisterBook(Model model) {
-		model.addAttribute("book", new BookRegisterDTO());
-		return "registerbook.html";
+		model.addAttribute("bookRegisterDto", new BookRegisterDTO());
+		return "admin/registerbook.html";
 	}
 	
 }

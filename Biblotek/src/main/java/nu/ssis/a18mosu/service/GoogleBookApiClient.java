@@ -1,7 +1,6 @@
 package nu.ssis.a18mosu.service;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -39,15 +38,14 @@ public class GoogleBookApiClient implements RemoteBookApiClient {
 			book.setLanguage(jObject.getString("language"));
 			
 			String authors = jObject.getJSONArray("authors").toList()
-					.stream()
-						.filter(x -> x instanceof String)
-						.map(Object::toString)
-						.collect(Collectors.joining(", ")
-					);
+				.stream()
+					.filter(x -> x instanceof String)
+					.map(Object::toString)
+					.collect(Collectors.joining(", ")
+				);
 			book.setAuthors(authors);
 			
 			return Optional.of(book);
-			
 		} catch(IOException | JSONException e) {
 			return Optional.empty();
 		}

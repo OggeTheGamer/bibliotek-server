@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
+    <script src="/webjars/popper.js/1.14.4/umd/popper.min.js"></script>
     <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="/webjars/js-cookie/2.2.0/js.cookie.js"></script>
-    <script src="/webjars/popper.js/1.14.4/popper.js"></script>
     <script src="/js/main.js"></script>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/master.css}" href="../resources/static/css/master.css">
@@ -22,7 +22,7 @@
       <header>
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
           <a class="navbar-brand col-" th:href="@{/}" href="index.html">
-            <img class="mb-2" th:href="@{/images/favicom.png}" href="../static/images/favicon.png" alt="" width="36" height="36">
+            <img class="mb-2" th:src="@{/images/favicon.png}" src="../static/images/favicon.png" alt="" width="36" height="36">
             <h5 class="p-2 my-0 mr-md-auto font-weight-normal navbar-brand text-dark" th:href="@{/}" href="index.html">SSIS Bibliotek</h5>
           </a>
           <div class="col-9"></div>

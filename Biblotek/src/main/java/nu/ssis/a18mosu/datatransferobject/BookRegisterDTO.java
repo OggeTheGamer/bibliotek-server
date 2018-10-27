@@ -9,6 +9,6 @@ public class BookRegisterDTO {
 	
 	private String isbn;
 	@BookConstraint(status=BookStatus.NOT_FOUND)
-	private String id;
+	private Integer bookIdd;
 
 }

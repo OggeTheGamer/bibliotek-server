@@ -1,11 +1,13 @@
 package nu.ssis.a18mosu.model;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,39 +16,38 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Data
-@Document(collection = "users")
+@Data @Entity
+@Table(name="library_users")
 public class LibraryUser implements UserDetails {
 
 	@Getter(AccessLevel.NONE)
 	@Setter(AccessLevel.NONE)
 	private static final long serialVersionUID = 3913729226683610419L;
 	
-	@Getter(AccessLevel.NONE)
-	@Setter(AccessLevel.NONE)
-	private static final List<LibraryUserRole> STARTER_ROLES = Arrays.asList(LibraryUser.LibraryUserRole.ROLE_USER);
-	
-
 	@Id
 	private String id;
 	private String givenName;
 	private String familyName;
 	private UserSettings userSettings;
-	private List<LibraryUserRole> roles;
+//	private List<TEMPROLE> roles;
 	private String email;
 	private Boolean enabled;
+	@OneToMany(mappedBy="loanTaker")
+	private List<Loan> loans;
+	@OneToMany(mappedBy="book")
+	private List<Comment> comments;
+	
+	@Deprecated
+	public enum TEMPROLE {
+		ROLE_USER
+	}
 	
 	public static LibraryUser getDefault() {
 		LibraryUser libraryUser = new LibraryUser();
-		libraryUser.setRoles(STARTER_ROLES);
 		libraryUser.setEnabled(true);
 		UserSettings userSettings = UserSettings.getDefault();
-		libraryUser.setUserSettings(userSettings);
+//		libraryUser.setUserSettings(userSettings);
 		return libraryUser;
-	}
-
-	public enum LibraryUserRole {
-		ROLE_ADMIN, ROLE_TEACHER, ROLE_STUDENT, ROLE_USER
 	}
 
 	@Override

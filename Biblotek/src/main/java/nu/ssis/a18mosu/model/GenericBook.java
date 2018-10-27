@@ -3,24 +3,31 @@ package nu.ssis.a18mosu.model;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.Data;
 
-@Data @Document(collection="generic_books")
+@Data @Entity
+@Table(name="generic_books")
 public class GenericBook {
 
 	@Id
 	private String isbn;
 	private String title;
 	private String authors;
+	@Column(length=2083)
 	private String image;
+	@Column(columnDefinition="TEXT")
 	private String description;
 	private String language;
 	private Date registeredDate;
-	@DBRef
+	@OneToMany(mappedBy="book")
 	private List<Comment> comments;
+	@OneToMany(mappedBy="book")
+	private List<Book> books;
 
 }
