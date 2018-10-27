@@ -29,7 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/admin", "/admin/**").hasRole("USER")
 				.antMatchers("/user", "/user/**").hasRole("USER")
-				.antMatchers("/book/**/edit", "/book/**/edit/**").hasRole("ADMIN")
+				.antMatchers("/book/**/edit", "/book/**/edit/**").hasRole("USER")
 				.antMatchers("/book/**/comment/**").hasRole("USER")
 		.and()
 			.oauth2Login()

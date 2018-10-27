@@ -22,12 +22,12 @@ public class AdlibrisBookApiClient implements RemoteBookApiClient {
 			RemoteGenericBookDTO genericBook = new RemoteGenericBookDTO();
 			genericBook.setIsbn(isbn);
 			genericBook.setTitle(adlibrisPage.getElementsByClass("heading--product-title").get(0).text());
-			genericBook.setAuthors(adlibrisPage.getElementsByClass("heading--product-title-more  ").text());
+			genericBook.setAuthors(adlibrisPage.getElementsByClass("heading--product-title-more").text());
 			genericBook.setDescription(adlibrisPage.getElementById("product-description").text());
 			genericBook.setImage(adlibrisPage.getElementsByClass("product-header__img").attr("src"));
 
 			return Optional.of(genericBook);
-		} catch (IOException e) {
+		} catch (IOException | IndexOutOfBoundsException e) {
 			return Optional.empty();
 		}
 	}

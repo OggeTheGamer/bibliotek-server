@@ -30,7 +30,7 @@ public @interface BookConstraint {
 	
 }
 
-class LoanConstraintValidator implements ConstraintValidator<BookConstraint, String> {
+class LoanConstraintValidator implements ConstraintValidator<BookConstraint, Integer> {
 
 	@Autowired 
 	private LoanService loanService;
@@ -42,7 +42,7 @@ class LoanConstraintValidator implements ConstraintValidator<BookConstraint, Str
 	}
 	
 	@Override
-	public boolean isValid(String bookId, ConstraintValidatorContext context) {
+	public boolean isValid(Integer bookId, ConstraintValidatorContext context) {
 		return loanService.bookStatus(bookId) == bc.status();
 	}
 	

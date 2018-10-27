@@ -19,7 +19,7 @@ public class LibraryUserService {
 	}
 
 	public LibraryUser register(LibraryUser user) {
-		return libraryUserRepo.insert(user);
+		return libraryUserRepo.save(user);
 	}
 
 }

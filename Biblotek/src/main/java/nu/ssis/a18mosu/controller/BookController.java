@@ -27,8 +27,6 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 	@Autowired
-	private LoanService loanService;
-	@Autowired
 	private ModelMapper modelMapper;
 	@Autowired
 	private CommentService commentService;
@@ -45,7 +43,7 @@ public class BookController {
 	public String specificBook(@PathVariable("isbn") String isbn, Model model) {
 		GenericBook book = bookService.getGenericBook(isbn);
 		model.addAttribute("book", book);
-		model.addAttribute("status", loanService.genericBookStatus(isbn).toString()); // TODO
+//		model.addAttribute("status", loanService.genericBookStatus(isbn).toString()); // TODO
 		model.addAttribute("commentDto", new CommentDTO());
 
 		return "book.html";

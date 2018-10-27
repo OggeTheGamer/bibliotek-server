@@ -1,24 +1,28 @@
 package nu.ssis.a18mosu.model;
 
 import java.util.Date;
-import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import lombok.Data;
 
-@Data @Document(collection="comments")
+@Data @Entity
+@Table(name="comments")
 public class Comment {
 	
-	@Id
-	private String id;
-	@DBRef
+	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+	@ManyToOne
 	private LibraryUser author;
-	@DBRef
-	private List<Comment> replies;
 	private Date createdAt;
 	private String content;
+	@ManyToOne
+	private GenericBook book;
+	
 	
 }
