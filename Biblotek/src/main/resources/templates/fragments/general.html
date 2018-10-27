@@ -21,15 +21,15 @@
     <div th:fragment="header">
       <header>
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-          <a class="navbar-brand col-" th:href="@{/}" href="index.html">
-            <img class="mb-2" th:src="@{/images/favicon.png}" src="../static/images/favicon.png" alt="" width="36" height="36">
+          <a class="navbar-brand col-sm-2" th:href="@{/}" href="index.html">
+            <img class="mb-2" th:src="@{/images/favicon.png}" src="../static/images/favicon.png" alt="Logo" width="36" height="36">
             <h5 class="p-2 my-0 mr-md-auto font-weight-normal navbar-brand text-dark" th:href="@{/}" href="index.html">SSIS Bibliotek</h5>
           </a>
-          <div class="col-9"></div>
-          <div class="col-1" sec:authorize="isAuthenticated() == false">
+          <div class="col-sm-9"></div>
+          <div class="col-sm-1" sec:authorize="isAuthenticated() == false">
             <button class="p-2 text-dark btn btn-outline-primary" th:href="@{/oauth2/authorization/google}" href="#"><i class="fas fa-key"></i> Logga in</button>
           </div>
-          <div class="dropdown col-1" sec:authorize="isAuthenticated()">
+          <div class="dropdown col-sm-1" sec:authorize="isAuthenticated()">
 
             <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-bars"></i></button>
             <div class="dropdown-menu dropdown-menu-right">
