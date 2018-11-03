@@ -2,10 +2,13 @@ package nu.ssis.a18mosu.controller;
 
 import java.security.Principal;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,8 +31,10 @@ public class BookController {
 	private BookService bookService;
 	@Autowired
 	private ModelMapper modelMapper;
-	@Autowired
+	@Autowired	
 	private CommentService commentService;
+	@Autowired
+	private LoanService loanService;
 	@Autowired
 	private LibraryUserDetailsService userService;
 	
@@ -43,23 +48,31 @@ public class BookController {
 	public String specificBook(@PathVariable("isbn") String isbn, Model model) {
 		GenericBook book = bookService.getGenericBook(isbn);
 		model.addAttribute("book", book);
-//		model.addAttribute("status", loanService.genericBookStatus(isbn).toString()); // TODO
+		model.addAttribute("status", loanService.genericBookStatus(isbn).toString());
 		model.addAttribute("commentDto", new CommentDTO());
-
+		model.addAttribute("comments", commentService.findCommentsByIsbn(isbn));
 		return "book.html";
 	}
 	
 	@GetMapping("/book/random")
-	public String specificBook() {
+	public String randomBook() {
 		String isbn = bookService.getRandomIsbn();
 		return "redirect:/book/" + isbn;
 	}
 	
 	@PostMapping("/book/{isbn}/comment")
-	public String comment(@PathVariable("isbn") String isbn, Model model, @ModelAttribute CommentDTO commentDto, Principal principal) {
-		LibraryUser libraryUser = userService.loadUserByUsername(principal.getName());
-		commentService.comment(commentDto, libraryUser, isbn);
-		return "redirect:/book/" + isbn + "/";
+	public String comment(
+			@PathVariable("isbn") String isbn, 
+			Model model,
+			@Valid @ModelAttribute CommentDTO commentDto, 
+			BindingResult result,
+			Principal principal
+			) {
+		if(!result.hasErrors()) {
+			LibraryUser libraryUser = userService.loadUserByUsername(principal.getName());
+			commentService.comment(commentDto, libraryUser, isbn);
+		}
+		return "redirect:/book/" + isbn;
 	}
 
 	

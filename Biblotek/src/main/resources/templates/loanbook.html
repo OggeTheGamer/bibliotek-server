@@ -3,6 +3,7 @@
 <head>
   <div th:replace="fragments/general.html :: head"></div>
   <title th:text="'Låna '+${book.title}">Låna boktitel</title>
+  <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body>
@@ -10,14 +11,14 @@
 
   <h1>är du säker på att du vill låna denna bok?</h1>
 
-  <form class="" method="post">
-    <input type="hidden" name="" th:field="*{isbn}" th:value="${book.isbn}">
-    <select class="" name="">
-      <option value="" disabled>Välj ett bok-id</option>
-      <option th:each="b : ${books}" th:value="${b.bookId}" th:text="${b.bookId}"></option>
+  <form class="" th:action="@{/loan}" method="post" th:object="${loanBookDto}">
+    <select class="" name="" th:field="*{bookId}">
+      <option value="" disabled selected>Välj bok-id</option>
+      <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.id}"></option>
     </select>
+    <input type="submit" name="" value="Låna">
+    <div class="g-recaptcha" th:attr="data-sitekey=${@captchaSettings.getSite()}"></div>
   </form>
-  <p>recaptcha</p>
   <div th:replace="fragments/general.html :: footer"></div>
 </body>
 </html>

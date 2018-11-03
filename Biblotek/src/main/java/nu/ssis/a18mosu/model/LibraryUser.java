@@ -16,7 +16,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Data @Entity
+@Getter @Setter @Entity
 @Table(name="library_users")
 public class LibraryUser implements UserDetails {
 
@@ -26,7 +26,7 @@ public class LibraryUser implements UserDetails {
 	
 	@Id
 	private String id;
-	private String givenName;
+	private String givenName;	
 	private String familyName;
 	private UserSettings userSettings;
 //	private List<TEMPROLE> roles;

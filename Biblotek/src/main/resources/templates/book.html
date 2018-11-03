@@ -50,9 +50,8 @@
           </p>
         </p>
       </div>
-    </div>
-      <div class="container">
-        <form sec:authorize="isAuthenticated()" th:action="@{'/book/'+${book.isbn}+'/comment/'}" method="post" th:object="${commentDto}">
+      <div class="row">
+        <form sec:authorize="isAuthenticated()" th:action="@{'/book/'+${book.isbn}+'/comment'}" method="post" th:object="${commentDto}">
           <h4>Skriv en komentar om boken här!</h3>
           <textarea class="col-sm-7" th:attribute="*{content}" name="content" rows="4" cols="80"></textarea>
           <div>
@@ -60,11 +59,11 @@
           </div>
         </form>
       </div>
-      <p class="container border-bottom">Komentarer</p>
-      <div class="container" th:each="comment : ${book.comments}">
-        <p th:text="${comment.author.givenName}">username</p>
-        <p th:text="${comment.content}">content</p>
+      <div class="container alert alert-secondary" th:each="comment : ${comments}">
+        <p th:text="${comment.author.givenName}">Given name</p>
+        <p th:text="${comment.content}">Comment content</p>
       </div>
+    </div>
     <div th:replace="fragments/general.html :: footer"></div>
   </body>
 </html>

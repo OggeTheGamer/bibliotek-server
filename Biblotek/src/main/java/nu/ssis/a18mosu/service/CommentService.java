@@ -1,6 +1,7 @@
 package nu.ssis.a18mosu.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +31,17 @@ public class CommentService {
 		Comment comment = modelMapper.map(commentDto, Comment.class);
 		comment.setAuthor(libraryUser);
 		comment.setCreatedAt(new Date());
+		comment.setBook(genericBookRepo.findById(isbn).get());
 		
 		commentRepo.save(comment);
 		genericBook.getComments().add(comment);
 		genericBookRepo.save(genericBook);
 		
 	}
+
+	public List<Comment> findCommentsByIsbn(String isbn) {
+		return commentRepo.findByIsbn(isbn);
+	}
+
 	
 }

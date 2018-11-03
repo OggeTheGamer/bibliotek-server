@@ -31,6 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/user", "/user/**").hasRole("USER")
 				.antMatchers("/book/**/edit", "/book/**/edit/**").hasRole("USER")
 				.antMatchers("/book/**/comment/**").hasRole("USER")
+				.antMatchers("/loan", "/loan/**").hasRole("USER")
 		.and()
 			.oauth2Login()
 				.loginPage("/")
