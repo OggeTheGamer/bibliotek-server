@@ -27,7 +27,7 @@
           </a>
           <div class="col-sm-9"></div>
           <div class="col-sm-1" sec:authorize="isAuthenticated() == false">
-            <button class="p-2 text-dark btn btn-outline-primary" th:href="@{/oauth2/authorization/google}" href="#"><i class="fas fa-key"></i> Logga in</button>
+            <button id="login" class="p-2 text-dark btn btn-outline-primary" th:href="@{/oauth2/authorization/google}" href="#"><i class="fas fa-key"></i> Logga in</button>
           </div>
           <div class="dropdown col-sm-1" sec:authorize="isAuthenticated()">
 
@@ -41,7 +41,7 @@
               <a class="p-2 text-dark dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/help}" href="#"><i class="far fa-question-circle"></i> Hjälp</a>
               <a class="p-2 text-dark dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/userSettings}" href="#"><i class="fas fa-cog"></i> Instälningar</a>
               <div class="dropdown-divider"></div>
-              <a class="p-2 text-dark dropdown-item" sec:authorize="isAuthenticated()" href="#"><i class="fas fa-key"></i> Logga ut</a>
+              <a id="logout" class="p-2 text-dark dropdown-item" sec:authorize="isAuthenticated()" href="#"><i class="fas fa-key"></i> Logga ut</a>
             </div>
           </div>
         </div>
