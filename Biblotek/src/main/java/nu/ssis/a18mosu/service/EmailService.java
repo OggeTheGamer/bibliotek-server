@@ -9,7 +9,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
@@ -19,7 +21,13 @@ import org.thymeleaf.context.Context;
 import nu.ssis.a18mosu.model.Loan;
 
 @Component
+@PropertySource("secrets.properties")
 public class EmailService {
+	//TODO AuthenticationFailedException
+	@Value("${library.mail.emailadress}")
+	private String emailAdress;
+	@Value("${library.email.password}")
+	private String password;
 
 	@Bean
 	public JavaMailSender getJavaMailSender() {
@@ -27,14 +35,14 @@ public class EmailService {
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
 
-		mailSender.setUsername("movitz.sunar@gmail.com");
-		mailSender.setPassword("");
+		mailSender.setUsername(emailAdress);
+		mailSender.setPassword(password);
 
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.debug", "true");
+//		props.put("mail.debug", "true");
 
 		return mailSender;
 	}

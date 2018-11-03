@@ -22,6 +22,7 @@
             <h5 class="p-2 my-0 mr-md-auto font-weight-normal navbar-brand text-dark" th:href="@{/}" href="index.html">SSIS Bibliotek</h5>
           </a>
           <div class="col-9"></div>
+          <p th:if="${user}" th:text="${user.givenName}"></p>
           <div class="dropdown col-1">
             <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">=</button>
             <div class="dropdown-menu dropdown-menu-right">
@@ -29,7 +30,7 @@
               <a class="p-2 text-dark dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" href="#">Administratör</a>
               <a class="p-2 text-dark dropdown-item" th:href="@{/book/random}" href="#">Slumpmässig bok</a>
               <div class="dropdown-divider"></div>
-              <a class="p-2 text-dark dropdown-item" sec:authorize="isAuthenticated()" href="#">Logga ut</a>
+              <a id="logout" class="p-2 text-dark dropdown-item" sec:authorize="isAuthenticated()" href="#">Logga ut</a>
               <a class="p-2 text-dark dropdown-item" sec:authorize="isAuthenticated() == false" th:href="@{/oauth2/authorization/google}" href="#">Logga in</a>
             </div>
           </div>

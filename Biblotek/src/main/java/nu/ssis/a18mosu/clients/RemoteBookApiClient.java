@@ -1,4 +1,4 @@
-package nu.ssis.a18mosu.service;
+package nu.ssis.a18mosu.clients;
 
 import java.util.Optional;
 
