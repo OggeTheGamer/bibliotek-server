@@ -1,6 +1,5 @@
 package nu.ssis.a18mosu.security;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,11 +14,8 @@ import nu.ssis.a18mosu.repository.LibraryUserRepository;
 @Service
 public class LibraryUserDetailsService extends OidcUserService implements UserDetailsService {
 	
-	
 	@Autowired
 	private LibraryUserRepository libraryUserRepo;
-	@Autowired
-	private ModelMapper modelMapper;
 	
 	@Override
 	public OidcUser loadUser(OidcUserRequest userRequest) {
@@ -33,7 +29,7 @@ public class LibraryUserDetailsService extends OidcUserService implements UserDe
 			libraryUser.setGivenName(user.getGivenName());
 			libraryUser.setFamilyName(user.getFamilyName());
 			libraryUser.setId(sub);
-			libraryUserRepo.insert(libraryUser);
+			libraryUserRepo.save(libraryUser);
 		}
 		return user;
 	}

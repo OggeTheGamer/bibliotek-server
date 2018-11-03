@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import nu.ssis.a18mosu.datatransferobject.BookRegisterDTO;
 import nu.ssis.a18mosu.datatransferobject.RemoteGenericBookDTO;
 import nu.ssis.a18mosu.exception.NotFoundException;
 import nu.ssis.a18mosu.model.Book;
@@ -20,10 +21,10 @@ import nu.ssis.a18mosu.model.Comment;
 import nu.ssis.a18mosu.model.GenericBook;
 import nu.ssis.a18mosu.repository.BookRepository;
 import nu.ssis.a18mosu.repository.GenericBookRepository;
+import nu.ssis.a18mosu.repository.LoanRepository;
 
 @Service
 public class BookService {
-	
 
 	private static final GenericBook DEFAULT_BOOK;
 	
@@ -48,7 +49,7 @@ public class BookService {
 		bookApiClients = new ArrayList<RemoteBookApiClient>(applicationContext.getBeansOfType(RemoteBookApiClient.class).values());
 	}
 
-	public Book getBook(final String id) {
+	public Book getBook(Integer id) {
 		return bookRepo.findById(id).orElseThrow(()-> new NotFoundException());
 	}
 	
@@ -56,14 +57,13 @@ public class BookService {
 		return genericBookRepo.findById(isbn).orElseThrow(()-> new NotFoundException());
 	}
 
-	public void registerBook(final String isbn, final String bookId) {
-		GenericBook genericBook = genericBookRepo.findById(isbn)
-				.orElse(genericBookRepo.insert(getRemoteGenericBook(isbn)));
-		Book book = new Book();
+	public void registerBook(BookRegisterDTO bookDto) {
+		GenericBook genericBook = genericBookRepo.findById(bookDto.getIsbn())
+				.orElse(genericBookRepo.save(getRemoteGenericBook(bookDto.getIsbn())));
+		Book book = modelMapper.map(bookDto, Book.class);
 		book.setRegisteredDate(new Date());
 		book.setBook(genericBook);
-		book.setId(bookId);
-		bookRepo.insert(book);
+		bookRepo.save(book);
 	}
 
 	private GenericBook getRemoteGenericBook(String isbn) {
@@ -95,6 +95,10 @@ public class BookService {
 	public String getRandomIsbn() {
 		int numBooks = (int) genericBookRepo.count();
 		return genericBookRepo.findAll(PageRequest.of(random.nextInt(numBooks), 1)).getContent().get(0).getIsbn();
+	}
+
+	public List<Book> getBooksByIsbn(String isbn) {
+		return null;
 	}
 
 }

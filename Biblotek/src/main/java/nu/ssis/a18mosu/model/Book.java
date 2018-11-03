@@ -1,22 +1,27 @@
 package nu.ssis.a18mosu.model;
 
 import java.util.Date;
+import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.Data;
 
-@Data @Document(collection="books")
+@Data @Entity
+@Table(name="books")
 public class Book {
 	
 	@Id
-	private String id;
-	@DBRef
+	private Integer id;
+	@ManyToOne
 	private GenericBook book;
-	private Boolean avaliable;
 	private Date registeredDate;
+	@OneToMany(mappedBy="book")
+	private List<Loan> loans;
 	
 	public enum BookStatus {
 		LOANED, AVALIABLE, NOT_FOUND
