@@ -67,6 +67,22 @@
         </li>
       </ul>
     </nav>
+    <nav>
+      <ul class="pagination">
+        <li th:class="${books.number == 0 ? 'disabled' : ''} + ' page-item'">
+          <a class="page-link" th:if="${books.number == 0}" href="#">Föregående</a>
+          <a class="page-link" th:if="${books.number != 0}" th:href="@{${'/'}(page=${books.number-1})}" href="#">Föregående</a>
+        </li>
+        <li  th:each="pageNumber : ${#numbers.sequence(0, books.totalPages-1)}" th:class="${books.number == pageNumber ? 'active' : ''} + ' page-item'">
+          <a class="page-link" th:if="${books.number != pageNumber}" th:text="${pageNumber+1}" th:href="@{${'/'}(page=${pageNumber})}" href="#">0</a>
+          <a class="page-link" th:if="${books.number == pageNumber}" th:text="${pageNumber+1}" href="#">0</a>
+        </li>
+        <li th:class="${books.number == books.totalPages - 1 ? 'disabled' : ''} + ' page-item'">
+          <a class="page-link" th:if="${books.number == books.totalPages - 1}" href="#">Nästa</a>
+          <a class="page-link" th:if="${books.number != books.totalPages - 1}" th:href="@{${'/'}(page=${books.number+1})}" href="#">Nästa</a>
+        </li>
+      </ul>
+    </nav>
     <div th:replace="fragments/general.html :: footer"></div>
   </body>
 </html>

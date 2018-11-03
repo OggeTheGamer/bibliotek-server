@@ -59,3 +59,10 @@
 .div-showhim:hover .div-showhim {
   display: block;
 }
+
+#cookie-popup .modal-dialog{
+  position:fixed;
+  bottom:0px;
+  right:0px;
+  margin:0px;
+}

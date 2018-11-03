@@ -21,3 +21,18 @@ $(() => {
     });
 
 });
+
+$('#cookie-popup', () => {
+  if(Cookies.get('cookie-consent') != 'true') {
+    $('#cookie-popup').modal({
+      backdrop: false,
+      keyboard: false,
+      focus: false,
+      show: true
+    });
+  }
+  $('#cookie-accept').on('click', () => {
+    Cookies.set('cookie-consent', 'true');
+    $('#cookie-popup').modal('hide');
+  });
+});
