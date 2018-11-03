@@ -9,9 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data @Entity
+@Getter @Setter  @Entity
 @Table(name="generic_books")
 public class GenericBook {
 

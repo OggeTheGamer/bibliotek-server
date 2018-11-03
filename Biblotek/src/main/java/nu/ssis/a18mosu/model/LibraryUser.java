@@ -12,7 +12,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AccessLevel;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,8 +44,10 @@ public class LibraryUser implements UserDetails {
 	public static LibraryUser getDefault() {
 		LibraryUser libraryUser = new LibraryUser();
 		libraryUser.setEnabled(true);
-		UserSettings userSettings = UserSettings.getDefault();
-//		libraryUser.setUserSettings(userSettings);
+		UserSettings userSettings = new UserSettings();
+		userSettings.setSendReturnMail(true);
+		userSettings.setSendThanksMail(true);
+		libraryUser.setUserSettings(userSettings);
 		return libraryUser;
 	}
 
