@@ -39,3 +39,10 @@
 .userSettings-Checkbox-Save {
   margin-top: 12px;
 }
+
+#cookie-popup .modal-dialog{
+  position:fixed;
+  bottom:0px;
+  right:0px;
+  margin:0px;
+}
