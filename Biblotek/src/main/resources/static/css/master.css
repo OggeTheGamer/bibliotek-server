@@ -1,4 +1,4 @@
-.indicator-LOANED {
+3.indicator-LOANED {
   background-color: rgba(240, 0, 0, 1);
   border: 0px;
   border-radius: 50px;
@@ -20,6 +20,14 @@
   margin-top: 5px;
 }
 
+.index-Card-Btn {
+  padding: 0 !important;
+}
+
+.index-dropdown-btn {
+  opacity: 0.56;
+}
+
 .dropdown-MainCss {
   align: left;
 }
@@ -38,6 +46,18 @@
 
 .userSettings-Checkbox-Save {
   margin-top: 12px;
+}
+
+.div-showme {
+  display: none;
+  z-index: 2;
+  position: relative;
+  float: right;
+
+}
+
+.div-showhim:hover .div-showhim {
+  display: block;
 }
 
 #cookie-popup .modal-dialog{
