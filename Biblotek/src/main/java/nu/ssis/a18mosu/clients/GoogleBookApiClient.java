@@ -31,7 +31,6 @@ public class GoogleBookApiClient implements RemoteBookApiClient {
 			jObject = jObject.getJSONArray("items").getJSONObject(0).getJSONObject("volumeInfo");
 			
 			RemoteGenericBookDTO book = new RemoteGenericBookDTO();
-			book.setIsbn(isbn);
 			book.setDescription(jObject.getString("description"));
 			book.setTitle(jObject.getString("title"));
 			book.setImage(jObject.getJSONObject("imageLinks").getString("thumbnail"));

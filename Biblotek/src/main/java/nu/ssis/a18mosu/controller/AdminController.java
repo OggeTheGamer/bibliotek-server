@@ -1,6 +1,7 @@
 package nu.ssis.a18mosu.controller;
 
 import java.security.Principal;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -28,12 +29,18 @@ public class AdminController {
 			Model model,
 			Principal principal) {
 		if(result.hasErrors()) {
-			model.addAttribute("message", "Detta bok-id finns redan i databasen");
+			
+			model.addAttribute("message", result.getAllErrors().stream()
+					.map(e -> e.getDefaultMessage())
+					.filter(s -> s != null)
+					.collect(Collectors.joining())
+				);
+			
+			return "admin/registerbook.html";
 		} else {
 			bookService.registerBook(bookRegisterDto);
+			return "redirect:/book/" + bookRegisterDto.getIsbn();
 		}
-		
-		return "admin/registerbook.html";
 	}
 	
 	@GetMapping("/admin/registerbook")

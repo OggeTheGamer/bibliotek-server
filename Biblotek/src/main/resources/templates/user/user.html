@@ -8,7 +8,7 @@
 <header th:replace="fragments/general.html :: header"></header>
   <div class="container">
     <div class="border-bottom">
-      <h1>Hej <span th:text="${user}">Användarnamn</span></h1>
+      <h1>Hej <span th:text="${user.givenName}">Användarnamn</span>!</h1>
       <br>
       <div id="accordion">
         <div class="card">

@@ -28,10 +28,10 @@ import nu.ssis.a18mosu.repository.GenericBookRepository;
 @Service
 public class BookService {
 
-	private static final GenericBook DEFAULT_BOOK;
+	private static final RemoteGenericBookDTO DEFAULT_BOOK;
 
 	static {
-		DEFAULT_BOOK = new GenericBook();
+		DEFAULT_BOOK = new RemoteGenericBookDTO();
 		DEFAULT_BOOK.setTitle("Okänd titel");
 		DEFAULT_BOOK.setDescription("Vi kunde inte hitta boken i databasen men du kan låna den ändå!");
 	}
@@ -71,21 +71,21 @@ public class BookService {
 		bookRepo.save(book);
 	}
 
-	private GenericBook getRemoteGenericBook(String isbn) {
+	public GenericBook getRemoteGenericBook(String isbn) {
 		GenericBook genericBook = new GenericBook();
 		genericBook.setRegisteredDate(new Date());
 		genericBook.setComments(new ArrayList<Comment>());
 		genericBook.setIsbn(isbn);
-
+		
+		Optional<RemoteGenericBookDTO> optionalBook = Optional.empty();
 		for (RemoteBookApiClient client : bookApiClients) {
-			Optional<RemoteGenericBookDTO> optionalBook = client.getRemoteGenericBook(isbn);
+			optionalBook = client.getRemoteGenericBook(isbn);
 			if (optionalBook.isPresent()) {
-				modelMapper.map(optionalBook.get(), genericBook);
-				return genericBook;
+				break;
 			}
 		}
 
-		modelMapper.map(DEFAULT_BOOK, genericBook);
+		modelMapper.map(optionalBook.orElseGet(() -> DEFAULT_BOOK), genericBook);
 		return genericBook;
 	}
 
@@ -107,7 +107,7 @@ public class BookService {
 		return bookRepo.findByIsbn(isbn);
 	}
 
-	// FIXME Very inefficient,
+	// FIXME Very inefficient, SQL
 	public List<Book> getAvaliableBooksByIsbn(String isbn) {
 		return bookRepo.findByIsbn(isbn)
 				.stream()

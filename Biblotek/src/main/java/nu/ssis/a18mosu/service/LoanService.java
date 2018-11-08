@@ -1,9 +1,14 @@
 package nu.ssis.a18mosu.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import nu.ssis.a18mosu.datatransferobject.LoanBookDTO;
@@ -21,6 +26,8 @@ public class LoanService {
 	private LoanRepository loanRepo;
 	@Autowired
 	private BookRepository bookRepo;
+	@Autowired
+	private EmailService emailService;
 
 	public Loan getActiveLoanByBookId(Integer bookId) {
 		return loanRepo.findActiveByBookId(bookId).get(0);
@@ -31,7 +38,14 @@ public class LoanService {
 		loan.setBook(bookRepo.findById(loanBookDto.getBookId()).get());
 		loan.setLoanedDate(new Date());
 		loan.setLoanTaker(user);
-		return loanRepo.save(loan);
+		loan = loanRepo.save(loan);
+		try {
+			emailService.sendThanksMail(loan);
+		} catch (MessagingException e ) {
+			e.printStackTrace(); //XXX
+		}
+		
+		return loan;
 	}
 	
 	public void returnBook(Integer bookId) {
@@ -66,6 +80,36 @@ public class LoanService {
 			}
 			return BookStatus.LOANED;
 		}
+	}
+	
+	/***
+	 * Runs every day except weekends at five in the morning and notifies users with overdue loans
+	 */
+	@Scheduled(cron="0 0 5 * * MON-FRI")
+	private void emailUsersOverdueLoans() {
+		for(Loan loan : getOverdueLoans()) {
+			try {
+				emailService.sendReturnMail(loan);
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/***
+	 * Returns loans that are overdue by one month.
+	 * 
+	 * @return overdue loans
+	 */
+	public List<Loan> getOverdueLoans() {
+		return loanRepo.findAllActive() //TODO This can be done with SQL
+				.stream()
+				.filter(loan -> {
+					Calendar c = Calendar.getInstance();
+					c.add(Calendar.MONTH, -1);
+					return loan.getLoanedDate().before(c.getTime());
+				})
+				.collect(Collectors.toList());
 	}
 
 }

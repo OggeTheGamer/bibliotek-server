@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class RemoteGenericBookDTO {
 	
-	private String isbn;
 	private String title;
 	private String authors;
 	private String image;

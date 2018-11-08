@@ -9,7 +9,7 @@
     <div class="conatiner col-sm-12">
       <h1>Registrera bok</h1>
       <p th:text="${message}"></p>
-      <form action="#" th:action="@{/admin/registerbook}" th:object="${bookRegisterDto}" method="post">
+      <form action="#" th:action="@{/admin/registerbook}" th:object="${bookRegisterDto}" method="post" autocomplete="off">
         <p>
           <label class="col-1" for="isbn">ISBN: </label>
           <input class="col-2 bookRegistration-Input-Numbers" id="isbn" type="text" name="isbn" th:field="*{isbn}" autofocus />

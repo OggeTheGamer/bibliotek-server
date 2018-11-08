@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -35,6 +36,8 @@ public class LibraryUser implements UserDetails {
 	private List<Loan> loans;
 	@OneToMany(mappedBy="book")
 	private List<Comment> comments;
+	@ManyToMany(mappedBy="subscribers")
+	private List<GenericBook> subscriptions;
 	
 	@Deprecated
 	public enum TEMPROLE {

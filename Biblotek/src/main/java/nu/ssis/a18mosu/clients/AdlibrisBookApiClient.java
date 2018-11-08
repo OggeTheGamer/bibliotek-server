@@ -20,7 +20,6 @@ public class AdlibrisBookApiClient implements RemoteBookApiClient {
 			Document adlibrisPage = Jsoup.connect(URL_PREFIX + isbn).get();
 
 			RemoteGenericBookDTO genericBook = new RemoteGenericBookDTO();
-			genericBook.setIsbn(isbn);
 			genericBook.setTitle(adlibrisPage.getElementsByClass("heading--product-title").get(0).text());
 			genericBook.setAuthors(adlibrisPage.getElementsByClass("heading--product-title-more").text());
 			genericBook.setDescription(adlibrisPage.getElementById("product-description").text());

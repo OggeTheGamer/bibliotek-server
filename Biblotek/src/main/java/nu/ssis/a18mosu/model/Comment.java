@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter  @Entity
+@Getter @Setter @Entity
 @Table(name="comments")
 public class Comment {
 	
@@ -24,6 +24,5 @@ public class Comment {
 	private String content;
 	@ManyToOne
 	private GenericBook book;
-	
 	
 }

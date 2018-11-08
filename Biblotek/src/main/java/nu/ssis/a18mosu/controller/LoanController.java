@@ -1,6 +1,5 @@
 package nu.ssis.a18mosu.controller;
 
-import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +18,13 @@ import nu.ssis.a18mosu.datatransferobject.ReturnBookDTO;
 import nu.ssis.a18mosu.model.LibraryUser;
 import nu.ssis.a18mosu.model.Loan;
 import nu.ssis.a18mosu.service.BookService;
-import nu.ssis.a18mosu.service.EmailService;
 import nu.ssis.a18mosu.service.LoanService;
-import nu.ssis.a18mosu.validator.RecaptchaConstraint;
 
 @Controller
 public class LoanController {
 
 	@Autowired
 	private LoanService loanService;
-	@Autowired
-	private EmailService emailService;
 	@Autowired
 	private BookService bookService;
 	@Autowired
@@ -44,11 +39,6 @@ public class LoanController {
 			) {
 		if(!result.hasErrors() && recaptchaClient.verify(recaptchaResponse)) {
 			Loan loan = loanService.loanBook(user, loanBookDto);
-			try {
-				emailService.sendThanksMail(loan);
-			} catch (MessagingException e) {
-				e.printStackTrace(); //XXX
-			}
 			return "redirect:/book/" + loan.getBook().getBook().getIsbn();
 			
 		} else {

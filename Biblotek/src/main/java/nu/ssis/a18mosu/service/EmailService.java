@@ -76,7 +76,7 @@ public class EmailService {
 
 		Context context = new Context();
 		context.setVariable("loan", loan);
-		String messageText =  templateEngine.process("emails/return.html", context);
+		String messageText =  templateEngine.process("emails/returnbook.html", context);
 		
 		m.setText(messageText);
 		m.setContent(messageText, "text/html");
