@@ -6,19 +6,6 @@
     <meta property="og:title" content="SSIS Bibliotek" />
     <meta property="og:type" content="website" />
     <link rel="stylesheet" th:href="@{/css/index.css}" href="../static/css/index.css">
-
-    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="/webjars/js-cookie/2.2.0/js.cookie.js"></script>
-    <script src="/webjars/popper.js/1.14.4/popper.js"></script>
-    <script src="/js/main.js"></script>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/master.css}" href="../static/css/master.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-
   </head>
   <body>
     <header th:replace="fragments/general.html :: header"></header>
@@ -28,7 +15,7 @@
         <div th:each="book : ${books}" class="col-sm-3 pt-4">
 
           <div class="card">
-            <div class="btn-outline-primary text-dark index-Card-Btn text-center div-showhim">
+            <div class="btn btn-outline-primary text-dark index-Card-Btn text-center div-showhim">
               <div class="div-showme div-showhim">
                 <div class="btn-group" role="group">
                   <button id="btnGroupDrop1" type="button" class="btn btn-secondary index-dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars"></i></button>
@@ -41,9 +28,9 @@
                 </div>
               </div>
               <a th:href="@{'/book/'+${book.isbn}}" href="#" class="text-dark">
-              <img class="card-img-top bookCover" th:src="${book.image}" src="../static/images/hehe.jpg" alt="Book img not found">
+              <img class="card-img-top w-100 h-75" th:src="${book.image}" src="../static/images/hehe.jpg" alt="Book img not found">
               <div class="card-body">
-                <div class="card-title">
+                <div class="card-title index-Card-Btn-Text w-100 h-25">
                   <h5  th:text="${book.title}">Bok titel Bok titel Bok titel Bok titel</h5>
                 </div>
               </div>
