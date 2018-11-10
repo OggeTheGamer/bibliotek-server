@@ -1,4 +1,4 @@
-3.indicator-LOANED {
+.indicator-LOANED {
   background-color: rgba(240, 0, 0, 1);
   border: 0px;
   border-radius: 50px;
@@ -14,14 +14,14 @@
   padding: 10px;
 }
 
-.bookCover {
-  width: 201px;
-  height: 280px;
-  margin-top: 5px;
-}
-
 .index-Card-Btn {
   padding: 0 !important;
+  height: 26rem;
+  overflow:hidden;
+}
+
+.index-Card-Btn-Text {
+  white-space: normal;
 }
 
 .index-dropdown-btn {
@@ -50,10 +50,9 @@
 
 .div-showme {
   display: none;
-  z-index: 2;
+  z-index: 2 !important;
   position: relative;
   float: right;
-
 }
 
 .div-showhim:hover .div-showhim {

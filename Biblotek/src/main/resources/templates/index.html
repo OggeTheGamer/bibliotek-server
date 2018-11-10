@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-  <div th:replace="fragments/general.html :: head"></div>
-  <title>Hem</title>
-  <meta property="og:title" content="SSIS Bibliotek" />
-  <meta property="og:type" content="website" />
-  <link rel="stylesheet" th:href="@{/css/index.css}" href="../static/css/index.css">
-</head>
-<body>
-  <header th:replace="fragments/general.html :: header"></header>
-  <h1>Böcker</h1>
+  <head>
+    <div th:replace="fragments/general.html :: head"></div>
+    <title>Hem</title>
+    <meta property="og:title" content="SSIS Bibliotek" />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" th:href="@{/css/index.css}" href="../static/css/index.css">
+  </head>
+  <body>
+    <header th:replace="fragments/general.html :: header"></header>
+    <h1>Böcker</h1>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div th:each="book : ${books}" class="col-sm-3 pt-4">
 
-  <div class="container">
-    <div class="row justify-content-center">
-
-      <div th:each="book : ${books}" class="col-sm-3 pt-4">
-
-          <div class="card" th:href="@{'/book/'+${book.isbn}}">
+          <div class="card">
             <div class="btn btn-outline-primary text-dark index-Card-Btn text-center div-showhim">
               <div class="div-showme div-showhim">
                 <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-secondary index-dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars"></i></button>
-                  <div class="dropdown-menu dropdown-menu-right">
+                  <button id="btnGroupDrop1" type="button" class="btn btn-secondary index-dropdown-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars"></i></button>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
                     <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i> Lägg till i läslista</a>
                     <a class="dropdown-item" href="#"><i class="fas fa-clipboard-list"></i> Ta bort från läslista</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#"><i class="fas fa-exclamation-triangle"></i> Rapportera</a>
+                    <a class="dropdown-item text-danger" href="#"><i class="fas fa-exclamation-triangle"></i> Raportera</a>
                   </div>
                 </div>
                 </div>
@@ -35,28 +33,35 @@
                   <h5 th:text="${book.title}">Bok titel</h5>
                 </div>
               </div>
-            </div>
+              <a th:href="@{'/book/'+${book.isbn}}" href="#" class="text-dark">
+              <img class="card-img-top w-100 h-75" th:src="${book.image}" src="../static/images/hehe.jpg" alt="Book img not found">
+              <div class="card-body">
+                <div class="card-title index-Card-Btn-Text w-100 h-25">
+                  <h5  th:text="${book.title}">Bok titel Bok titel Bok titel Bok titel</h5>
+                </div>
+              </div>
+            </a>
           </div>
+        </div>
 
       </div>
-
-    </div>
-  </div>
-    <nav class="row justify-content-center">
-      <ul class="pagination">
-        <li class="col-" th:class="${books.number == 0} ? 'disabled page-item' : 'page-item'">
-          <a class="page-link" th:if="${books.number == 0}" href="javascript:void(0);">Föregående</a>
-          <a class="page-link" th:if="${books.number != 0}" th:href="@{${'/'}(page=${books.number-1})}" href="#">Föregående</a>
-        </li>
-        <li class="col-" th:each="pageNumber : ${#numbers.sequence(1, books.totalPages)}" th:class="${books.number+1 == pageNumber ? 'active page-item' : 'page-item'}">
-          <a class="page-link" th:text="${pageNumber}" th:href="@{${'/'}(page=${pageNumber-1})}" href="#">0</a>
-        </li>
-        <li class="col-" th:class="${books.number == books.totalPages-1} ? 'disabled page-item' : 'page-item'">
-          <a class="page-link" th:if="${books.number == books.totalPages}" href="javascript:void(0);">Nästa</a>
-          <a class="page-link" th:if="${books.number != books.totalPages}" th:href="@{${'/'}(page=${books.number+1})}" href="#">Nästa</a>
-        </li>
-      </ul>
-    </nav>
+      </div>
+      <nav class="row justify-content-center">
+        <ul class="pagination">
+          <li class="col-" th:class="${books.number == 0} ? 'disabled page-item' : 'page-item'">
+            <a class="page-link" th:if="${books.number == 0}" href="javascript:void(0);">Föregående</a>
+            <a class="page-link" th:if="${books.number != 0}" th:href="@{${'/'}(page=${books.number-1})}" href="#">Föregående</a>
+          </li>
+          <li class="col-" th:each="pageNumber : ${#numbers.sequence(1, books.totalPages)}" th:class="${books.number+1 == pageNumber ? 'active page-item' : 'page-item'}">
+            <a class="page-link" th:text="${pageNumber}" th:href="@{${'/'}(page=${pageNumber-1})}" href="#">0</a>
+          </li>
+          <li class="col-" th:class="${books.number == books.totalPages-1} ? 'disabled page-item' : 'page-item'">
+            <a class="page-link" th:if="${books.number == books.totalPages}" href="javascript:void(0);">Nästa</a>
+            <a class="page-link" th:if="${books.number != books.totalPages}" th:href="@{${'/'}(page=${books.number+1})}" href="#">Nästa</a>
+          </li>
+        </ul>
+      </nav>
+      </div>
     <div th:replace="fragments/general.html :: footer"></div>
   </body>
 </html>
